@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ManagerProducts</string>
+    <string name="chkRemember">Remember</string>
+    <string name="txvUser" translatable="false">Username</string>
+    <string name="txvPassword" translatable="false">Password</string>
+    <string name="password_length" translatable="false">Password length must be 8 caracters</string>
+    <string name="data_empty">You must enter value in the field</string>
+    <string name="edtPassword">Enter password</string>
+    <string name="edtUser">Enter username</string>
+    <string name="btnLogin">Login</string>
+    <string name="password_digit">Must contain at least one digit</string>
+    <string name="password_case">It must contain al least one character in upper/lower case</string>
+    <string name="accept">Bien!</string>
 </resources>
