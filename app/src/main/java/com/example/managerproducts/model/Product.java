@@ -120,7 +120,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return mName + " " + mConcentration;
+        return mName + " " + mConcentration + " Mg";
     }
     //endregion
 

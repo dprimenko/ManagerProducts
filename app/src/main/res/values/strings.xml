@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Manager Products</string>
+    <string name="app_name">FarmApp</string>
     <string name="chkRemember">Remember</string>
     <string name="txvUser" translatable="false">Username</string>
     <string name="txvPassword" translatable="false">Password</string>
@@ -10,4 +10,11 @@
     <string name="btnLogin">Login</string>
     <string name="password_digit">Must contain at least one digit</string>
     <string name="password_case">It must contain al least one character in upper/lower case</string>
+    <string name="tilName">Name</string>
+    <string name="tilDescription">Description</string>
+    <string name="tilBrand">Brand</string>
+    <string name="tilPrice">Price</string>
+    <string name="tilConcentration">Strength</string>
+    <string name="btnAddProduct">Add Product</string>
+    <string name="bien">Bien!</string>
 </resources>

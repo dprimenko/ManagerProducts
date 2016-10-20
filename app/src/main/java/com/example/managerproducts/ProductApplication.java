@@ -28,7 +28,7 @@ public class ProductApplication  extends Application{
         addProduct(new Product("MDMA", "Para pasarlo bien", "The Streets", "20", 20.00, 18, R.drawable.mdma));
     }
 
-    private void addProduct(Product product) {
+    public void addProduct(Product product) {
         productList.add(product);
     }
 

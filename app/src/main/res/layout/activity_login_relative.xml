@@ -10,56 +10,74 @@
     android:id="@+id/relativeLayout"
     >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txvUser"
-        android:id="@+id/txvUser"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/imgLogo"
+        android:src="@drawable/logo"
+        android:layout_centerHorizontal="true"/>
 
-        android:textSize="22sp"
-        />
-
-
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/edt_margin_left"
-        android:id="@+id/edtUser"
-        android:layout_toRightOf="@+id/txvUser"
-        />
+        android:id="@+id/usernameLayout"
+        android:layout_below="@id/imgLogo"
+        android:layout_marginTop="@dimen/margin_top">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txvUser"
+            android:id="@+id/txvUser"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="22sp"
+            />
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/txvPassword"
-        android:id="@+id/txvPassword"
-        android:layout_below="@id/txvUser"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="22sp"
-        android:layout_marginTop="@dimen/margin_top"
-        />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/edt_margin_left"
+            android:id="@+id/edtUser"
+            android:layout_toRightOf="@+id/txvUser"
 
-    <EditText
+            />
+    </LinearLayout>
+
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/edt_margin_left"
-        android:inputType="textPassword"
-        android:id="@+id/edtPassword"
-        android:layout_below="@+id/edtUser"
-        android:layout_toRightOf="@id/txvPassword"
-        />
+        android:id="@+id/passwordLayout"
+        android:layout_below="@id/usernameLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txvPassword"
+            android:id="@+id/txvPassword"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textSize="22sp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/edt_margin_left"
+            android:inputType="textPassword"
+            android:id="@+id/edtPassword"
+            />
+
+    </LinearLayout>
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/chkRemember"
         android:id="@+id/chkRemember"
-        android:layout_below="@id/edtPassword"
+        android:layout_below="@id/passwordLayout"
         android:layout_alignParentRight="true"
         android:layout_marginTop="@dimen/margin_top"
         />
@@ -70,6 +88,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/margin_top"
         android:text="@string/btnLogin"
-        android:id="@+id/btnLogin"/>
+        android:id="@+id/btnLogin"
+        android:background="@color/btnColor"
+        android:textColor="@color/btnText"/>
 
 </RelativeLayout>
