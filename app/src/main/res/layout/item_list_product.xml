@@ -14,7 +14,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/imgHeight"
         android:id="@+id/infoLayout"
         android:layout_alignBaseline="@id/imgProduct"
         android:layout_toRightOf="@id/imgProduct">
@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:text="25€"
             android:layout_below="@id/txvTitle"
+            android:layout_alignParentBottom="true"
             android:textSize="20sp"
             android:layout_marginLeft="@dimen/item_margin_left"/>
     </RelativeLayout>
