@@ -1,2 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.4.0_e0bdda00b7e4ee22d93701131561a9216e6e8d74/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/design/23.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="1aa5b025efe97f5006f5be16d6ca67c6c3c0c0d8">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-23.2.0_9c5e76f6cd137128ea175cf77a94673900c990c1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.4.0_4d4c5f226bc01e4714a1426f40e14c87cff8b9f0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.4.0_0fb633e60ac8ccd1c9014e091acb368329875ddc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="d4c936aa8c7d2522c82e3f1829c791d9e367f009">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-23.2.0_c5608c717b1c2f6af3bd8b449dcec3ca07892e57/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.4.0_3bcc6decb07a3c31918cba8a996fb0155280021d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="b8773a7cb643333a8becfa8ff1f74f25377dee95">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_6464ceb488826df3ba5a794f79ddd234afef6d54/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/usuario/Desarrollo/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_4d2c76e5ec14f0f2b1f8ddb3b1fc173b593f153e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.4.0_0ce970e6f20dc8fc0fbcd019e1835d7641aa1b4d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="23.0.3"
+        sha1="2b810b2bed82465f439be73c1a5258b2ef036aec">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_398ce00f921fe0fc7fe70bc1ccb7d5c29a896ffb/classes.dex" />
+    </item>
+
+</items>

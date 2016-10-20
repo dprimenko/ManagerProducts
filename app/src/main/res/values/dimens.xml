@@ -4,4 +4,8 @@
     <dimen name="activity_vertical_margin">50dp</dimen>
     <dimen name="edt_margin_left">15dp</dimen>
     <dimen name="margin_top">25dp</dimen>
+    <dimen name="item_margin_left">15dp</dimen>
+    <dimen name="imgWidth">120dp</dimen>
+    <dimen name="imgHeight">86dp</dimen>
+    <dimen name="paddingList">16dp</dimen>
 </resources>
