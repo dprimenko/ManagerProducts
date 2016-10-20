@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/paddingList">
+
+    <ImageView
+        android:layout_width="@dimen/imgWidth"
+        android:layout_height="@dimen/imgHeight"
+        android:id="@+id/imgProduct"
+        app:srcCompat="@drawable/paracetamol"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/infoLayout"
+        android:layout_alignBaseline="@id/imgProduct"
+        android:layout_toRightOf="@id/imgProduct">
+        <TextView
+            android:id="@+id/txvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="Paracetamol"
+            android:textSize="25sp"
+            android:textColor="@color/textColor"
+            android:layout_marginLeft="@dimen/item_margin_left"
+            />
+        <TextView
+            android:id="@+id/txvPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="25€"
+            android:layout_below="@id/txvTitle"
+            android:textSize="20sp"
+            android:layout_marginLeft="@dimen/item_margin_left"/>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ManagerProducts</string>
+    <string name="app_name">Manager Products</string>
     <string name="chkRemember">Remember</string>
     <string name="txvUser" translatable="false">Username</string>
     <string name="txvPassword" translatable="false">Password</string>
@@ -10,5 +10,4 @@
     <string name="btnLogin">Login</string>
     <string name="password_digit">Must contain at least one digit</string>
     <string name="password_case">It must contain al least one character in upper/lower case</string>
-    <string name="accept">Bien!</string>
 </resources>

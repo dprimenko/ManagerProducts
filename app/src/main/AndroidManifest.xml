@@ -8,7 +8,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".LoginApplication">
+        android:name=".ProductApplication"
+        >
         <activity android:name=".ListProducts_Activity">
         </activity>
         <activity android:name=".LoginRelative_Activity">

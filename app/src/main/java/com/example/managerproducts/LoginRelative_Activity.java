@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.support.design.widget.Snackbar;
 
+import com.example.managerproducts.interfaces.ILoginMvp;
+import com.example.managerproducts.presenter.LoginPresenter;
+
 /**
  * Created by dprimenko on 19/10/16.
  */
