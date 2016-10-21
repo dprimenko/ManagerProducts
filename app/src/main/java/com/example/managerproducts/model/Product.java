@@ -1,5 +1,7 @@
 package com.example.managerproducts.model;
 
+import java.util.Locale;
+
 /**
  * Created by David Primenko on 19/10/16.
  */
@@ -84,6 +86,14 @@ public class Product {
 
     public void setmImage(int mImage) {
         this.mImage = mImage;
+    }
+
+    public String getFormattedPrice() {
+        return String.format("€%s", mPrice);
+    }
+
+    public String getFormattedStock() {
+        return String.format(Locale.getDefault(), "%d u.", mStock);
     }
     //endregion
 

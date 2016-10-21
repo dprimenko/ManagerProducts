@@ -5,7 +5,7 @@
     <dimen name="edt_margin_left">15dp</dimen>
     <dimen name="margin_top">25dp</dimen>
     <dimen name="item_margin_left">15dp</dimen>
-    <dimen name="imgWidth">120dp</dimen>
-    <dimen name="imgHeight">86dp</dimen>
+    <dimen name="imgWidth">80dp</dimen>
+    <dimen name="imgHeight">46dp</dimen>
     <dimen name="paddingList">16dp</dimen>
 </resources>

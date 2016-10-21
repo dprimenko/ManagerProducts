@@ -6,4 +6,7 @@
     <color name="textColor">#000000</color>
     <color name="btnColor">#4CAF50</color>
     <color name="btnText">#FFFFFF</color>
+    <color name="stockColorPositive">#388E3C</color>
+    <color name="stockColorNegative">#D32F2F</color>
+    <color name="altColor">#244caf50</color>
 </resources>

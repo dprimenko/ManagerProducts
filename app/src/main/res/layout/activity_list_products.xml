@@ -9,13 +9,16 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_horizontal_margin"
-    tools:context="com.example.managerproducts.ListProducts_Activity">
+    tools:context="com.example.managerproducts.ListProducts_Activity"
+    android:focusableInTouchMode="true">
 
 
     <AutoCompleteTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/acSearch" />
+        android:id="@+id/acSearch"
+        android:nextFocusUp="@id/acSearch"
+        android:nextFocusLeft="@id/acSearch"/>
 
     <ListView
         android:id="@android:id/list"
@@ -25,6 +28,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:focusableInTouchMode="true"
         />
 
     <android.support.design.widget.FloatingActionButton
