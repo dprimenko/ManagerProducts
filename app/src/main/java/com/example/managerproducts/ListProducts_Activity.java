@@ -57,13 +57,20 @@ public class ListProducts_Activity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        Intent intent;
+
         switch (item.getItemId()) {
             case R.id.action_sort_alphabetically:
                 sortProductList(3);
                 break;
             case R.id.action_settings_general:
+                intent = new Intent(this, GeneralSettings_Activity.class);
+                startActivity(intent);
                 break;
             case R.id.action_settings_account:
+                intent = new Intent(this, AccountSettings_Activity.class);
+                startActivity(intent);
                 break;
             case R.id.action_logout:
 

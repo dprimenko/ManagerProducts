@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/pref_login_category">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:title="@string/pref_remember_title"
+            android:key="switch_pref_remember"
+            />
+        <EditTextPreference
+            android:defaultValue="Default value"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/pref_user_title"
+            android:key="edt_pref_user"
+            android:summary="@string/pref_user_summary"/>
+        <EditTextPreference
+            android:defaultValue="Default value"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/pref_password_title"
+            android:key="edt_pref_password"
+            android:summary="@string/pref_password_summary"
+            android:inputType="textWebPassword"/>
+    </PreferenceCategory>
+</PreferenceScreen>

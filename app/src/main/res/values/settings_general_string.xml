@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_general_category">Configuración general</string>
+    <string name="pref_numcolumn_title">Número de columnas</string>
+    <string name="pref_numcolumn_summary">Indicar número de columnas a visualizar</string>
+    <string name="pref_show_image_title">Mostrar imagen</string>
+    <string name="pref_show_image_summary">Mostrar las imágenes en los listados</string>
+    <string-array name="pref_numcolumn_entries">
+        <item>1 columna</item>
+        <item>2 columnas</item>
+        <item>3 columnas</item>
+        <item>4 columnas</item>
+    </string-array>
+    <string-array name="pref_numcolumn_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+</resources>

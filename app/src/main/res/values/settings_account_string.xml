@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_login_category">Configuración cuenta</string>
+    <string name="pref_remember_title">Recordar login</string>
+    <string name="pref_user_title">Usuario</string>
+    <string name="pref_user_summary">Nombre de usuario de la aplicación</string>
+    <string name="pref_password_title">Contraseña</string>
+    <string name="pref_password_summary">Contraseña del usuario de la aplicación</string>
+</resources>
