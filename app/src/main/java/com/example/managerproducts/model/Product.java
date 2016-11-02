@@ -1,5 +1,6 @@
 package com.example.managerproducts.model;
 
+import java.util.Comparator;
 import java.util.Locale;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Locale;
  * Class Product
  */
 
-public class Product {
+public class Product implements Comparable<Product>{
 
     //region Fields
     private String mId;
@@ -21,6 +22,19 @@ public class Product {
     private double mPrice;
     private int mStock;
     private int mImage;
+    public static final Comparator<Product> PRICE_COMPARATOR = new Comparator<Product>() {
+        @Override
+        public int compare(Product p1, Product p2) {
+
+            return Double.compare(p1.getmPrice(), p2.getmPrice());
+        }
+    };
+    public static final Comparator<Product> STOCK_COMPARATOR = new Comparator<Product>() {
+        @Override
+        public int compare(Product p1, Product p2) {
+            return p1.getmStock() - p2.getmStock();
+        }
+    };
     //endregion
 
     //region Getter&Setter
@@ -89,7 +103,7 @@ public class Product {
     }
 
     public String getFormattedPrice() {
-        return String.format("€%s", mPrice);
+        return String.format("%s€", mPrice);
     }
 
     public String getFormattedStock() {
@@ -100,7 +114,7 @@ public class Product {
     //region OverrideMethods
 
     /*
-    * Dos productos son iguales cuando tienen el mismo nombre, marca y concetracion
+    * Dos productos son iguales cuando tienen el mismo nombre, marca
     */
 
     @Override
@@ -144,6 +158,16 @@ public class Product {
         this.mPrice = mPrice;
         this.mStock = mStock;
         this.mImage = mImage;
+    }
+
+    @Override
+    public int compareTo(Product p) {
+        if (this.getmName().compareTo(p.getmName()) == 0) {
+            return this.getmBrand().compareTo(p.getmBrand());
+        }
+        else {
+            return this.getmName().compareTo(p.getmName());
+        }
     }
     //endregion
 

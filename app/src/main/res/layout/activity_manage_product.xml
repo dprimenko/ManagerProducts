@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/paddingList"
+    android:paddingLeft="@dimen/paddingList"
+    android:paddingRight="@dimen/paddingList"
+    android:paddingBottom="@dimen/paddingList"
+    android:id="@+id/addProductLayout"
+    android:focusableInTouchMode="true">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tilName"
+            android:maxLength="30"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tilName"
+        app:counterEnabled="true"
+        app:counterMaxLength="100">
+
+        <EditText
+            android:id="@+id/edtDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tilDescription"
+            android:maxLength="100"
+            android:inputType="textMultiLine"/>
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tilBrand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tilDescription">
+
+        <EditText
+            android:id="@+id/edtBrand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tilBrand"
+            android:maxLength="20"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/numericLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tilBrand"
+        android:layout_marginTop="25dp">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            >
+
+            <EditText
+                android:id="@+id/edtPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/tilPrice"
+                android:inputType="numberDecimal" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/txvCurrency"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="€"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:layout_gravity="bottom"
+            android:layout_toRightOf="@id/tilPrice"
+            android:layout_weight="1"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="25dp"
+            android:textColor="@color/textColor"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilConcentration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            >
+
+            <EditText
+                android:id="@+id/edtConcentration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/tilConcentration"
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Mg"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:layout_weight="2"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/textColor"
+            />
+
+    </LinearLayout>
+
+    <include layout="@layout/btn_merge"/>
+
+</RelativeLayout>

@@ -5,6 +5,8 @@ import android.app.Application;
 import com.example.managerproducts.model.Product;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -13,6 +15,8 @@ import java.util.List;
 
 public class ProductApplication  extends Application{
     private ArrayList<Product> productList;
+    private static final int PRICE_COMPARISION = 0;
+    private static final int STOCK_COMPARISION = 1;
 
     @Override
     public void onCreate() {
@@ -32,7 +36,19 @@ public class ProductApplication  extends Application{
         productList.add(product);
     }
 
-    public List<Product> getListProducts() {
+    public List<Product> getListProducts(int sortRequestCode) {
+
+        switch (sortRequestCode) {
+            case PRICE_COMPARISION:
+                Collections.sort(productList, (p1,p2) -> Double.compare(p1.getmPrice(), p2.getmPrice()));
+                break;
+            case STOCK_COMPARISION:
+                Collections.sort(productList, (p1,p2) -> p2.getmStock() - p1.getmStock());
+                break;
+            default:
+                Collections.sort(productList);
+                break;
+        }
         return productList;
     }
 }

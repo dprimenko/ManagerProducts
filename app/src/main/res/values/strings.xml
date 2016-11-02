@@ -17,4 +17,8 @@
     <string name="tilConcentration">Strength</string>
     <string name="btnAddProduct">Add Product</string>
     <string name="bien">Bien!</string>
+    <string name="action_sort_alphabetically">Add product</string>
+    <string name="action_settings_account">Configuración de cuenta</string>
+    <string name="action_settings_general">Configuración general</string>
+    <string name="action_logout">Cerrar sesión</string>
 </resources>

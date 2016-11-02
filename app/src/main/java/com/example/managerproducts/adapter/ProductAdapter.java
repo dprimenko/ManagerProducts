@@ -22,7 +22,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     private Context context;
 
     public ProductAdapter(Context context) {
-        super(context, R.layout.item_list_product, ((ProductApplication)context.getApplicationContext()).getListProducts());
+        super(context, R.layout.item_list_product, ((ProductApplication)context.getApplicationContext()).getListProducts(0));
 
         this.context = context;
     }

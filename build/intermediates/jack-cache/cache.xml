@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        revision="24.0.2"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-e0bdda00b7e4ee22d93701131561a9216e6e8d74.jar" />
+    </item>
+    <item
+        jar="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        revision="24.0.2"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-0fb633e60ac8ccd1c9014e091acb368329875ddc.jar" />
+    </item>
+    <item
+        jar="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/design/23.1.1/jars/classes.jar"
+        revision="24.0.2"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-314a69b8b880d13c75cba9ccbfc319455df5b3df.jar" />
+    </item>
+    <item
+        jar="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        revision="24.0.2"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-0ce970e6f20dc8fc0fbcd019e1835d7641aa1b4d.jar" />
+    </item>
+    <item
+        jar="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        revision="24.0.2"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/internal_impl-23.4.0-3bcc6decb07a3c31918cba8a996fb0155280021d.jar" />
+    </item>
+    <item
+        jar="/home/usuario/Desarrollo/Android/Sdk/platforms/android-24/optional/org.apache.http.legacy.jar"
+        revision="24.0.2"
+        sha1="fb7023e781abb70ed1b0442eb611fbed295cae84">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/preJackRuntimeLibraries/debug/jars/8000/40/org.apache.http.legacy-e4e4a00bd3d46bb8fe84026e4ff8ac20de2095e3.jar" />
+    </item>
+    <item
+        jar="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.1/jars/classes.jar"
+        revision="24.0.2"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-3903df14381b6bc73d7d8fcdfd2b55a82aa5c2e4.jar" />
+    </item>
+    <item
+        jar="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        revision="24.0.2"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-4d4c5f226bc01e4714a1426f40e14c87cff8b9f0.jar" />
+    </item>
+    <item
+        jar="/home/usuario/Desarrollo/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        revision="24.0.2"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/support-annotations-23.4.0-4d2c76e5ec14f0f2b1f8ddb3b1fc173b593f153e.jar" />
+    </item>
+    <item
+        jar="/home/usuario/Desarrollo/Android/Sdk/platforms/android-24/android.jar"
+        revision="24.0.2"
+        sha1="d49cc0972df7adf495d3ad3d0cf71c0ec517ace4">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/transforms/preJackRuntimeLibraries/debug/jars/8000/40/android-7cf8fd2730525362107a67eb5ff6c39be96c0da4.jar" />
+    </item>
+
+</items>
