@@ -13,16 +13,19 @@
         <activity android:name=".ListProducts_Activity">
         </activity>
         <activity android:name=".LoginRelative_Activity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity android:name=".ManageProduct_Activity">
         </activity>
         <activity android:name=".GeneralSettings_Activity">
         </activity>
         <activity android:name=".AccountSettings_Activity">
+        </activity>
+        <activity android:name=".Signup_Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 </manifest>
