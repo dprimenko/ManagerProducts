@@ -3,6 +3,7 @@ package com.example.managerproducts;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,12 +12,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.example.managerproducts.interfaces.IValidateUser;
+import com.example.managerproducts.model.User;
+import com.example.managerproducts.presenter.SignupPresenter;
 
 /**
  * Created by dprimenko on 9/11/16.
  */
 
-public class Signup_Activity extends AppCompatActivity{
+public class Signup_Activity extends AppCompatActivity implements IValidateUser.View {
 
     private Spinner spProvinces;
     private Spinner spCities;
@@ -25,6 +31,7 @@ public class Signup_Activity extends AppCompatActivity{
     private TextInputLayout tilNameCompany;
     private AdapterView.OnItemSelectedListener spinnerListener;
     private ArrayAdapter<CharSequence> spProvincesAdapter;
+    private SignupPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +65,14 @@ public class Signup_Activity extends AppCompatActivity{
                 R.array.array_provincia_a_localidades,
                 android.R.layout.simple_spinner_dropdown_item);
 
-
-
         loadSpinnerProvinces();
     }
 
     public void signUp (View view) {
+        // Recoger los datos de la vista y llama al método del presentador
+        User user = new User();
 
+        presenter.validateCredentials(user);
     }
 
     private void showCompany(boolean show) {
@@ -90,5 +98,17 @@ public class Signup_Activity extends AppCompatActivity{
 
             }
         };
+    }
+
+    public void showCitySelected() {
+
+        Toast.makeText(getApplicationContext(), getString(R.string.message_province_city,
+                spProvinces.getSelectedItem().toString(),
+                spCities.getSelectedItem().toString()), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setMessageError(String error, int errCode) {
+        //String messageErro = getResources().getString(getResources().getIdentifier());
     }
 }

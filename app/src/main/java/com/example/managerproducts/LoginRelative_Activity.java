@@ -11,15 +11,13 @@ import android.widget.EditText;
 import android.support.design.widget.Snackbar;
 import android.widget.TextView;
 
-import com.example.managerproducts.interfaces.ILoginMvp;
+import com.example.managerproducts.interfaces.IValidateUser;
 import com.example.managerproducts.presenter.LoginPresenter;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by dprimenko on 19/10/16.
  */
-public class LoginRelative_Activity  extends AppCompatActivity implements ILoginMvp.View{
+public class LoginRelative_Activity  extends AppCompatActivity implements IValidateUser.View{
 
     private LoginPresenter loginMvp;
     private EditText edtPassword;

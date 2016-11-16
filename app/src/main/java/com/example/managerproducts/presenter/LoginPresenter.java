@@ -3,16 +3,15 @@ package com.example.managerproducts.presenter;
 import android.text.TextUtils;
 
 import com.example.managerproducts.R;
-import com.example.managerproducts.interfaces.ILoginMvp;
 
 /**
  * Created by dprimenko on 19/10/16.
  */
-public class LoginPresenter implements ILoginMvp.Presenter{
+public class LoginPresenter implements IValidateUser.Presenter{
 
-    private ILoginMvp.View view;
+    private IValidateUser.View view;
 
-    public LoginPresenter(ILoginMvp.View view) {
+    public LoginPresenter(IValidateUser.View view) {
 
         this.view = view;
     }
