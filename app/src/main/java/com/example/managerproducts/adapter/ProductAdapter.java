@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.managerproducts.ProductApplication;
+import com.example.managerproducts.ProductsRepository;
 import com.example.managerproducts.R;
 import com.example.managerproducts.model.Product;
 
@@ -22,8 +22,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     private Context context;
 
     public ProductAdapter(Context context) {
-        super(context, R.layout.item_list_product, ((ProductApplication)context.getApplicationContext()).getListProducts(0));
-
+        super(context, R.layout.item_list_product, ProductsRepository.getInstance().getListProducts());
         this.context = context;
     }
 
@@ -78,6 +77,11 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         return item;
 
         //endregion
+    }
+
+    public void addProduct(Product product) {
+        ProductsRepository.getInstance().addProduct(product);
+        notifyDataSetChanged();
     }
     // endregion
 

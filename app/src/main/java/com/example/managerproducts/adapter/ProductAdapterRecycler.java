@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.managerproducts.ProductApplication;
 import com.example.managerproducts.R;
 import com.example.managerproducts.model.Product;
 

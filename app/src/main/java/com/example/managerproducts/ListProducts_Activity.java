@@ -1,6 +1,5 @@
 package com.example.managerproducts;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.managerproducts.adapter.ProductAdapter;
 import com.example.managerproducts.adapter.ProductAdapterRecycler;
 
 public class ListProducts_Activity extends AppCompatActivity {
@@ -35,13 +33,13 @@ public class ListProducts_Activity extends AppCompatActivity {
         rcvProduct.setAdapter(adapter);
         //endregion
 
-        btnAddItem = (FloatingActionButton) findViewById(R.id.btnAddItem);
+        btnAddItem = (FloatingActionButton) findViewById(R.id.btn_add_item);
 
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ListProducts_Activity.this, ManageProduct_Activity.class);
-                startActivityForResult(intent, ADD_PRODUCT_REQUEST);
+                //Intent intent = new Intent(ListProducts_Activity.this, ManageProduct_Activity.class);
+                //startActivityForResult(intent, ADD_PRODUCT_REQUEST);
             }
         });
     }
@@ -69,8 +67,8 @@ public class ListProducts_Activity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.action_settings_account:
-                intent = new Intent(this, AccountSettings_Activity.class);
-                startActivity(intent);
+                /*intent = new Intent(this, AccountSettings_Activity.class);
+                startActivity(intent);*/
                 break;
             case R.id.action_logout:
 

@@ -2,10 +2,7 @@ package com.example.managerproducts.presenter;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.View;
 
-import com.example.managerproducts.ProductApplication;
 import com.example.managerproducts.R;
 import com.example.managerproducts.interfaces.IAddProductMvp;
 import com.example.managerproducts.model.Product;
@@ -19,7 +16,8 @@ public class AddProductPresenter implements IAddProductMvp.Presenter{
 
     private IAddProductMvp.View view;
 
-    public AddProductPresenter(IAddProductMvp.View view) {
+
+    public AddProductPresenter(IAddProductMvp.View view, Context context) {
         this.view = view;
     }
 
@@ -29,14 +27,9 @@ public class AddProductPresenter implements IAddProductMvp.Presenter{
             view.setMessageError(R.string.data_empty);
         }
         else {
-
             double priceParsed = Double.parseDouble(price);
-
-            Product product = new Product(name, description, brand, concentration, priceParsed, new Random().nextInt(100), new Random().nextInt(8));
-
-            ((ProductApplication)((Context)view).getApplicationContext()).addProduct(product);
-
-            view.startListProductsActivity();
+            Product product = new Product(name, description, brand, concentration, priceParsed, new Random().nextInt(100), R.drawable.defecto);
+            view.backToListProductFragment(product);
         }
     }
 }

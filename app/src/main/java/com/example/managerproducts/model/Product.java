@@ -1,5 +1,8 @@
 package com.example.managerproducts.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Comparator;
 import java.util.Locale;
 
@@ -11,7 +14,7 @@ import java.util.Locale;
  * Class Product
  */
 
-public class Product implements Comparable<Product>{
+public class Product implements Comparable<Product>, Parcelable{
 
     //region Fields
     private String mId;
@@ -36,6 +39,29 @@ public class Product implements Comparable<Product>{
         }
     };
     //endregion
+
+    protected Product(Parcel in) {
+        mId = in.readString();
+        mName = in.readString();
+        mDescription = in.readString();
+        mBrand = in.readString();
+        mConcentration = in.readString();
+        mPrice = in.readDouble();
+        mStock = in.readInt();
+        mImage = in.readInt();
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
 
     //region Getter&Setter
     public String getmId() {
@@ -168,6 +194,23 @@ public class Product implements Comparable<Product>{
         else {
             return this.getmName().compareTo(p.getmName());
         }
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mId);
+        dest.writeString(mName);
+        dest.writeString(mDescription);
+        dest.writeString(mBrand);
+        dest.writeString(mConcentration);
+        dest.writeDouble(mPrice);
+        dest.writeInt(mStock);
+        dest.writeInt(mImage);
     }
     //endregion
 

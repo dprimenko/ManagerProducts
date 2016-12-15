@@ -9,13 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.managerproducts.ProductApplication;
 import com.example.managerproducts.R;
 import com.example.managerproducts.model.Product;
-
-import org.w3c.dom.Text;
-
-import java.util.List;
 
 /**
  * Created by dprimenko on 21/10/16.
