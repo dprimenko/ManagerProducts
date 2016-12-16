@@ -13,6 +13,8 @@ import com.example.managerproducts.ProductsRepository;
 import com.example.managerproducts.R;
 import com.example.managerproducts.model.Product;
 
+import java.util.List;
+
 /**
  * Created by dprimenko on 21/10/16.
  */
@@ -20,12 +22,11 @@ import com.example.managerproducts.model.Product;
 public class ProductAdapter extends ArrayAdapter<Product> {
 
     private Context context;
+    private List<Product> tempList;
 
-    public ProductAdapter(Context context) {
-        super(context, R.layout.item_list_product, ProductsRepository.getInstance().getListProducts());
-        this.context = context;
+    public ProductAdapter(Context context, int resource) {
+        super(context, resource, ProductsRepository.getInstance().getListProducts());
     }
-
 
     //region Lo más eficiente!!
     @NonNull
@@ -34,7 +35,6 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
         View item = convertView;
         ProductHolder productHolder;
-        boolean par = ((position % 2) == 0);
 
         if (item == null) {
             // 1. Crear un objeto inflater que inicializamos al LayoutInflater del contexto
@@ -44,7 +44,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
             productHolder = new ProductHolder();
 
-        // 3. Asignar a las variables los Widget mediante el método findByViewId
+            // 3. Asignar a las variables los Widget mediante el método findByViewId
 
             productHolder.imgProduct = (ImageView) item.findViewById(R.id.imgProduct);
             productHolder.txvTitle = (TextView) item.findViewById(R.id.txvTitle);
@@ -52,7 +52,6 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             productHolder.txvStock = (TextView) item.findViewById(R.id.txvStock);
 
             item.setTag(productHolder);
-
         }
 
         else {
@@ -65,14 +64,6 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         productHolder.txvTitle.setText(getItem(position).getmName());
         productHolder.txvPrice.setText(getItem(position).getFormattedPrice());
         productHolder.txvStock.setText(getItem(position).getFormattedStock());
-
-        if (par) {
-            item.setBackgroundResource(R.color.altColor);
-        }
-
-        else {
-            item.setBackgroundResource(R.color.btnText);
-        }
 
         return item;
 

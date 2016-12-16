@@ -44,13 +44,12 @@ public class AccountPreference implements IPreferences{
         getEditor().putString(PASSWORD, password).apply();
     }
 
-    public String readUser(){
+    /*public String readUser(){
         return getEditor().putString(USER, "");
     }
-
     public String readPassword(){
         return getEditor().putString(PASSWORD, );
-    }
+    }*/
 
     private SharedPreferences.Editor getEditor(){
         return sharedPreferences.edit();

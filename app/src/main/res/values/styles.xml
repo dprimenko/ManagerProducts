@@ -6,6 +6,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:actionModeStyle">@style/Widget.ActionMode</item>
+        <item name="actionModeStyle">@style/Widget.ActionMode</item>
+        <!-- Para cambiar el boton back de la barra de acción-->
+        <!--<item name="android:actionModeCloseDrawable"></item>-->
+    </style>
+
+    <style name="Widget.ActionMode" parent="Widget.AppCompat.ActionMode">
+        <item name="background">@color/colorPrimary</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:actionModeBackground">@color/colorPrimary</item>
+        <item name="actionModeBackground">@color/colorPrimary</item>
     </style>
 
 </resources>
