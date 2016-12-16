@@ -2,6 +2,7 @@ package com.example.managerproducts;
 
 import android.content.Context;
 import android.os.Build;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ActionMode;
@@ -11,6 +12,8 @@ import android.view.MenuItem;
 import android.widget.AbsListView;
 
 import com.example.managerproducts.presenter.ListProductPresenter;
+import com.example.managerproducts.presenter.ManageProductPresenter;
+import com.example.managerproducts.presenter.MultiListProductPresenter;
 
 import java.util.AbstractList;
 
@@ -21,26 +24,24 @@ import java.util.AbstractList;
 public class SimpleMultiChoiceModeListener implements AbsListView.MultiChoiceModeListener{
 
 
-    private ListProductPresenter presenter;
     private StateContextMenuListener mCallback;
-    private Context context;
-    private int statusBarColor;
     private int cont;
 
-    public SimpleMultiChoiceModeListener(ListProductPresenter presenter, Context context) {
-        this.presenter = presenter;
-        this.context = context;
+    public SimpleMultiChoiceModeListener(Fragment fragment) {;
         this.cont = 0;
 
         try {
-            mCallback = (StateContextMenuListener) context;
+            mCallback = (StateContextMenuListener) fragment;
         } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement StateContextMenu");
+            throw new ClassCastException(fragment.toString() + " must implement StateContextMenu");
         }
     }
 
     public interface StateContextMenuListener {
         void onCreatedContextMenu();
+        void onItemCheckedStateChanged(int position, boolean checked);
+        void onPrepareActionModeContextMenu();
+        void onActionItemClicked(int action);
         void onDestroyedContextMenu();
     }
 
@@ -48,11 +49,10 @@ public class SimpleMultiChoiceModeListener implements AbsListView.MultiChoiceMod
     public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
         if (checked) {
             cont++;
-            //presenter.setNewSelection(position, checked);
         } else {
             cont--;
-            //presenter.removeSelection(position);
         }
+        mCallback.onItemCheckedStateChanged(position, checked);
         mode.setTitle(String.valueOf(cont));
     }
 
@@ -66,10 +66,7 @@ public class SimpleMultiChoiceModeListener implements AbsListView.MultiChoiceMod
 
     @Override
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            statusBarColor = ((AppCompatActivity)context).getWindow().getStatusBarColor();
-            ((AppCompatActivity)context).getWindow().setStatusBarColor(ContextCompat.getColor(context, R.color.colorAccent));
-        }
+        mCallback.onPrepareActionModeContextMenu();
         return true;
     }
 
@@ -77,18 +74,16 @@ public class SimpleMultiChoiceModeListener implements AbsListView.MultiChoiceMod
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_del_multiple:
-                presenter.deleteMultipleProducts();
+                mCallback.onActionItemClicked(MultiListProductPresenter.DELETE_MULTIPLE_ITEMS);
                 break;
         }
         mode.finish();
-        return false;
+        return true;
     }
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
+        cont = 0;
         mCallback.onDestroyedContextMenu();
-
-        //presenter.clearSelection();
-        mode.finish();
     }
 }

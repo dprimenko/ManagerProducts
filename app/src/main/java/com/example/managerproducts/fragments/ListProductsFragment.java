@@ -54,7 +54,7 @@ public class ListProductsFragment extends Fragment {
         try {
             mCallback = (ListProductFragmentListener) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement ListProductFragmentListener");
+            throw new ClassCastException(context.toString() + " must implement MultiListProductFragmentListener");
         }
     }
 

@@ -19,6 +19,7 @@ import com.example.managerproducts.R;
 import com.example.managerproducts.interfaces.IManageProductMvp;
 import com.example.managerproducts.model.Product;
 import com.example.managerproducts.presenter.ManageProductPresenter;
+import com.example.managerproducts.presenter.MultiListProductPresenter;
 
 /**
  * Created by dprimenko on 15/12/16.
@@ -46,7 +47,7 @@ public class ManageProductFragment extends Fragment implements IManageProductMvp
     }
 
     public interface ManageProductFragmentListener {
-        void onListProductFragment(Bundle bundle);
+        void onMultiListProductFragment(Bundle bundle);
     }
 
     @Override
@@ -105,7 +106,8 @@ public class ManageProductFragment extends Fragment implements IManageProductMvp
                     edtDescription.getText().toString(),
                     edtBrand.getText().toString(),
                     edtPrice.getText().toString(),
-                    edtConcentration.getText().toString());
+                    edtConcentration.getText().toString(),
+                    MultiListProductPresenter.ADD_PRODUCT_REQUEST);
         }
 
         return super.onOptionsItemSelected(item);
@@ -123,10 +125,11 @@ public class ManageProductFragment extends Fragment implements IManageProductMvp
     }
 
     @Override
-    public void backToListProductFragment(Product product) {
+    public void backToListProductFragment(Product product, int request) {
 
         Bundle bundle = new Bundle();
         bundle.putParcelable("product_key", product);
-        mCallback.onListProductFragment(bundle);
+        bundle.putInt("manage_request", request);
+        mCallback.onMultiListProductFragment(bundle);
     }
 }

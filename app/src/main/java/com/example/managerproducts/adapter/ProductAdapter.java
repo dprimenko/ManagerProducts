@@ -2,6 +2,7 @@ package com.example.managerproducts.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +73,16 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
     public void addProduct(Product product) {
         ProductsRepository.getInstance().addProduct(product);
+        notifyDataSetChanged();
+    }
+
+    public void updateProduct(Product product) {
+        ProductsRepository.getInstance().updateProduct(product);
+        notifyDataSetChanged();
+    }
+
+    public void deleteProduct(Product product) {
+        ProductsRepository.getInstance().deleteProduct(product);
         notifyDataSetChanged();
     }
     // endregion

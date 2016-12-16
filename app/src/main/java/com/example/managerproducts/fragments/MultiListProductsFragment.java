@@ -1,10 +1,13 @@
 package com.example.managerproducts.fragments;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,36 +20,33 @@ import android.widget.ListView;
 import com.example.managerproducts.R;
 import com.example.managerproducts.SimpleMultiChoiceModeListener;
 import com.example.managerproducts.adapter.ProductAdapter;
-import com.example.managerproducts.interfaces.IListProductMvp;
-import com.example.managerproducts.presenter.ListProductPresenter;
+import com.example.managerproducts.interfaces.IMultiListProductMvp;
+import com.example.managerproducts.model.Product;
+import com.example.managerproducts.presenter.MultiListProductPresenter;
+
+import java.util.ArrayList;
 
 /**
  * Created by dprimenko on 15/12/16.
  */
 
-public class MultiListProductsFragment extends Fragment implements SimpleMultiChoiceModeListener.StateContextMenuListener, IListProductMvp.View{
+public class MultiListProductsFragment extends Fragment implements SimpleMultiChoiceModeListener.StateContextMenuListener, IMultiListProductMvp.View{
 
     private FloatingActionButton btnAddProduct;
     private ListView lwProducts;
     private ProductAdapter adapter;
-    private ListProductPresenter presenter;
+    private MultiListProductPresenter presenter;
 
-    private static final int ADD_PRODUCT_REQUEST = 0;
-    private static final int EDIT_PRODUCT_REQUEST = 1;
+    private int statusBarColor;
 
-    private ListProductFragmentListener mCallback;
-
-    @Override
-    public void onCreatedContextMenu() {
-        btnAddProduct.setVisibility(View.GONE);
-    }
+    private MultiListProductFragmentListener mCallback;
 
     @Override
-    public void onDestroyedContextMenu() {
-        btnAddProduct.setVisibility(View.VISIBLE);
+    public ProductAdapter getAdapter() {
+        return adapter;
     }
 
-    public interface ListProductFragmentListener {
+    public interface MultiListProductFragmentListener {
         void onManageProductFragmentListener(Bundle bundle);
     }
 
@@ -57,6 +57,15 @@ public class MultiListProductsFragment extends Fragment implements SimpleMultiCh
     }
 
     public MultiListProductsFragment() {
+        presenter = new MultiListProductPresenter(this);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+        adapter = new ProductAdapter(getActivity(), R.layout.item_list_product);
+        getRequestManageProduct();
     }
 
     @Override
@@ -64,17 +73,10 @@ public class MultiListProductsFragment extends Fragment implements SimpleMultiCh
         super.onAttach(context);
 
         try {
-            mCallback = (ListProductFragmentListener) context;
+            mCallback = (MultiListProductFragmentListener) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement ListProductFragmentListener");
+            throw new ClassCastException(context.toString() + " must implement MultiListProductFragmentListener");
         }
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-        presenter = new ListProductPresenter(this);
     }
 
     @Nullable
@@ -84,7 +86,6 @@ public class MultiListProductsFragment extends Fragment implements SimpleMultiCh
         View rootView = inflater.inflate(R.layout.fragment_list_products, container, false);
 
         if (rootView != null) {
-            adapter = new ProductAdapter(getActivity(), R.layout.item_list_product);
             lwProducts = (ListView) rootView.findViewById(R.id.lw_products);
             btnAddProduct = (FloatingActionButton) rootView.findViewById(R.id.btn_add_product);
 
@@ -106,7 +107,7 @@ public class MultiListProductsFragment extends Fragment implements SimpleMultiCh
         super.onViewCreated(view, savedInstanceState);
         lwProducts.setAdapter(adapter);
         lwProducts.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-        SimpleMultiChoiceModeListener mcl = new SimpleMultiChoiceModeListener(presenter, getActivity());
+        SimpleMultiChoiceModeListener mcl = new SimpleMultiChoiceModeListener(this);
         lwProducts.setMultiChoiceModeListener(mcl);
         lwProducts.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -141,11 +142,6 @@ public class MultiListProductsFragment extends Fragment implements SimpleMultiCh
     }
 
     @Override
-    public void showUndoSnackbar() {
-
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
     }
@@ -153,5 +149,84 @@ public class MultiListProductsFragment extends Fragment implements SimpleMultiCh
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+
+    // Métodos de la interfaz IManageProductMvp.View
+    @Override
+    public void showUndoSnackbar(final ArrayList<Product> products) {
+        Snackbar.make(getView(), getString(R.string.items_deleted), Snackbar.LENGTH_LONG)
+                .setAction("UNDO", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        presenter.restoreProducts(products);
+                        scrollDown();
+                    }
+                }).show();
+    }
+
+    // Métodos del Callback del menu contextual
+    @Override
+    public void onCreatedContextMenu() {
+        btnAddProduct.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onItemCheckedStateChanged(int position, boolean checked) {
+        if (checked) {
+            presenter.setNewSelection(position, checked);
+        } else  {
+            presenter.removeSelection(position);
+        }
+    }
+
+    @Override
+    public void onPrepareActionModeContextMenu() {
+
+        //Estoy investigando por que no se cambiar el color de la barra de estado
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            statusBarColor = getActivity().getWindow().getStatusBarColor();
+
+             getActivity().getWindow().setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorAccent));
+        }*/
+    }
+
+    @Override
+    public void onActionItemClicked(int action) {
+        switch (action) {
+            case MultiListProductPresenter.DELETE_MULTIPLE_ITEMS:
+                presenter.deleteMultipleProducts();
+                break;
+        }
+    }
+
+    @Override
+    public void onDestroyedContextMenu() {
+
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getActivity().getWindow().setStatusBarColor(statusBarColor);
+        }*/
+        btnAddProduct.setVisibility(View.VISIBLE);
+        presenter.clearSelection();
+    }
+
+    // Métodos propios del fragment
+
+    private void getRequestManageProduct() {
+
+        if (getArguments() != null) {
+            Product product = ((Product)getArguments().getParcelable("product_key"));
+
+            if (getArguments().getInt("manage_request") == MultiListProductPresenter.ADD_PRODUCT_REQUEST) {
+                presenter.addProduct(product);
+            }
+            else if (getArguments().getInt("manage_request") == MultiListProductPresenter.EDIT_PRODUCT_REQUEST) {
+                presenter.updateProduct(product);
+            }
+        }
+    }
+
+    private void scrollDown() {
+        lwProducts.smoothScrollToPosition((adapter.getCount() - 1));
     }
 }

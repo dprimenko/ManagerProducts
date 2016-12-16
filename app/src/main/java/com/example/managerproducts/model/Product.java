@@ -146,15 +146,13 @@ public class Product implements Comparable<Product>, Parcelable{
     @Override
     public boolean equals(Object o) {
         boolean result = false;
-        if (this != o) {
-            if (o instanceof Product) {
-                Product product = (Product) o;
+        if (o instanceof Product) {
+            Product product = (Product) o;
 
-                if ((this.mName.equals(product.getmName())) &&
-                        (this.mBrand.equals(product.getmBrand())) &&
-                        (this.mConcentration.equals(product.getmConcentration()))) {
-                    result = true;
-                }
+            if ((this.mName.equals(product.getmName())) &&
+                    (this.mBrand.equals(product.getmBrand())) &&
+                    (this.mConcentration.equals(product.getmConcentration()))) {
+                result = true;
             }
         }
         return result;

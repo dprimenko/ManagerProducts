@@ -14,7 +14,7 @@ import com.example.managerproducts.fragments.MultiListProductsFragment;
  * Created by dprimenko on 15/12/16.
  */
 
-public class MainActivity extends AppCompatActivity implements MultiListProductsFragment.ListProductFragmentListener, ListProductsFragment.ListProductFragmentListener, ManageProductFragment.ManageProductFragmentListener{
+public class MainActivity extends AppCompatActivity implements MultiListProductsFragment.MultiListProductFragmentListener, ListProductsFragment.ListProductFragmentListener, ManageProductFragment.ManageProductFragmentListener{
 
     private ListProductsFragment listProductsFragment;
     private ManageProductFragment manageProductFragment;
@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity implements MultiListProducts
     }
 
     @Override
-    public void onListProductFragment(Bundle bundle) {
-        multiListProductsFragment = MultiListProductsFragment.newInstance(null);
+    public void onMultiListProductFragment(Bundle bundle) {
+        multiListProductsFragment = MultiListProductsFragment.newInstance(bundle);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fl_main, multiListProductsFragment);
         ft.commit();

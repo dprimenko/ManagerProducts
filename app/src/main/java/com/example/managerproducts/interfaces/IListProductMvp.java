@@ -15,6 +15,6 @@ public interface IListProductMvp {
     }
 
     interface Presenter {
-        void deleteMultipleProducts();
+
     }
 }

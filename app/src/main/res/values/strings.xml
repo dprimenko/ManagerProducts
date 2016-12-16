@@ -23,4 +23,5 @@
     <string name="action_settings_general">Configuración general</string>
     <string name="action_logout">Cerrar sesión</string>
     <string name="add_product">Añadir producto</string>
+    <string name="items_deleted">Ha borrado productos de la lista</string>
 </resources>

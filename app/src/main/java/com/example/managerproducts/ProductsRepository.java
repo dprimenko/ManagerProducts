@@ -39,6 +39,18 @@ public class ProductsRepository {
         productList.add(product);
     }
 
+    public void updateProduct(Product product) {
+        if (productList.contains(product)) {
+            int index = productList.indexOf(product);
+            productList.set(index, product);
+        }
+    }
+
+    public void deleteProduct(Product product) {
+        productList.remove(product);
+
+    }
+
     public List<Product> getListProducts() {
         return productList;
     }
