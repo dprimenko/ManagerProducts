@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,19 +12,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.example.managerproducts.R;
-import com.example.managerproducts.interfaces.IAddProductMvp;
+import com.example.managerproducts.interfaces.IManageProductMvp;
 import com.example.managerproducts.model.Product;
-import com.example.managerproducts.presenter.AddProductPresenter;
+import com.example.managerproducts.presenter.ManageProductPresenter;
 
 /**
  * Created by dprimenko on 15/12/16.
  */
-public class ManageProductFragment extends Fragment implements IAddProductMvp.View {
+public class ManageProductFragment extends Fragment implements IManageProductMvp.View {
 
     private static final int  MAX_VALUE_PRICE = 8;
     private static final int  MAX_VALUE_CONCENTRATION = 5;
@@ -35,7 +33,7 @@ public class ManageProductFragment extends Fragment implements IAddProductMvp.Vi
     private EditText edtBrand;
     private EditText edtPrice;
     private EditText edtConcentration;
-    private IAddProductMvp.Presenter presenter;
+    private IManageProductMvp.Presenter presenter;
     private ManageProductFragmentListener mCallback;
 
     public ManageProductFragment() {
@@ -65,9 +63,9 @@ public class ManageProductFragment extends Fragment implements IAddProductMvp.Vi
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new AddProductPresenter(this, getContext());
+        presenter = new ManageProductPresenter(this, getContext());
         setRetainInstance(true);
-        hasOptionsMenu();
+        setHasOptionsMenu(true);
     }
 
     @Nullable
