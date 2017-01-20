@@ -6,4 +6,8 @@
         android:title="Eliminar productos"
         android:icon="@drawable/ic_delete"
         app:showAsAction="always"/>
+    <!--<item android:id="@+id/action_edit_product"
+        android:title="Editar productos"
+        android:icon="@drawable/ic_pencil"
+        app:showAsAction="always"/>-->
 </menu>

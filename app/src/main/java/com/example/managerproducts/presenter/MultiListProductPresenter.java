@@ -9,6 +9,7 @@ import com.example.managerproducts.model.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
@@ -79,7 +80,7 @@ public class MultiListProductPresenter implements IMultiListProductMvp.Presenter
     }
 
     @Override
-    public void updateProduct(Product product) {
-        view.getAdapter().updateProduct(product);
+    public void updateProduct() {
+
     }
 }

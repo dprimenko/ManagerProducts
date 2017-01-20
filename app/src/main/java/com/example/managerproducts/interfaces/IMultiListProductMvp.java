@@ -21,6 +21,6 @@ public interface IMultiListProductMvp {
         void deleteMultipleProducts();
         void addProduct(Product product);
         void restoreProducts(ArrayList<Product> products);
-        void updateProduct(Product product);
+        void updateProduct();
     }
 }

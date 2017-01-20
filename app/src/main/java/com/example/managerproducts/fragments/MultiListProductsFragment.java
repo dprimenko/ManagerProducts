@@ -144,11 +144,13 @@ public class MultiListProductsFragment extends Fragment implements SimpleMultiCh
     @Override
     public void onDetach() {
         super.onDetach();
+        mCallback = null;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        adapter = null;
     }
 
 
@@ -221,7 +223,6 @@ public class MultiListProductsFragment extends Fragment implements SimpleMultiCh
                 presenter.addProduct(product);
             }
             else if (getArguments().getInt("manage_request") == MultiListProductPresenter.EDIT_PRODUCT_REQUEST) {
-                presenter.updateProduct(product);
             }
         }
     }
