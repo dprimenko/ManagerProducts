@@ -19,8 +19,11 @@ public interface IMultiListProductMvp {
         void removeSelection(int position);
         void clearSelection();
         void deleteMultipleProducts();
-        void addProduct(Product product);
+
         void restoreProducts(ArrayList<Product> products);
-        void updateProduct();
+
+        void addProduct(Product product);
+        void getAllProducts();
+        void updateProduct(Product product);
     }
 }

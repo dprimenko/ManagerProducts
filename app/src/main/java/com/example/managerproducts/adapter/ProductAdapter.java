@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.managerproducts.DatabaseManager;
 import com.example.managerproducts.ProductsRepository;
 import com.example.managerproducts.R;
 import com.example.managerproducts.model.Product;
@@ -26,7 +27,12 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     private List<Product> tempList;
 
     public ProductAdapter(Context context, int resource) {
-        super(context, resource, ProductsRepository.getInstance().getListProducts());
+        super(context, resource);
+    }
+
+    public void addList() {
+        clear();
+        addAll(DatabaseManager.getInstance().getAllProducts());
     }
 
     //region Lo más eficiente!!
@@ -72,17 +78,17 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     }
 
     public void addProduct(Product product) {
-        ProductsRepository.getInstance().addProduct(product);
+        //DatabaseManager.getInstance().insert(product);
         notifyDataSetChanged();
     }
 
     public void updateProduct(Product product) {
-        ProductsRepository.getInstance().updateProduct(product);
+        //DatabaseManager.getInstance().update(product);
         notifyDataSetChanged();
     }
 
     public void deleteProduct(Product product) {
-        ProductsRepository.getInstance().deleteProduct(product);
+        //DatabaseManager.getInstance().delete(product);
         notifyDataSetChanged();
     }
     // endregion

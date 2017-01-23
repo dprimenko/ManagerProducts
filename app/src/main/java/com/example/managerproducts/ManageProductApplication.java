@@ -1,7 +1,7 @@
 package com.example.managerproducts;
 
 import android.app.Application;
-import android.provider.ContactsContract;
+import android.content.Context;
 
 import com.example.managerproducts.dao.DatabaseHelper;
 
@@ -11,9 +11,26 @@ import com.example.managerproducts.dao.DatabaseHelper;
 
 public class ManageProductApplication extends Application {
 
+    private static ManageProductApplication application;
+
+    private ManageProductApplication () {
+    }
+
+    public static ManageProductApplication getInstance() {
+
+        if (application == null) {
+            application = new ManageProductApplication();
+        }
+        return application;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
-        DatabaseHelper.getInstance(this).open();
+        DatabaseHelper.getInstance().open();
+    }
+
+    public Context getContext() {
+        return this;
     }
 }

@@ -1,11 +1,17 @@
 package com.example.managerproducts.dao;
 
 import android.content.Context;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
+import android.util.Log;
 
+import com.example.managerproducts.ManageProductApplication;
 import com.example.managerproducts.schema.ManageProductContract;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by usuario on 20/01/17.
@@ -21,31 +27,74 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * en getInstance()
      * **/
     private volatile static DatabaseHelper databaseHelper;
+    private AtomicInteger mOpenCounter;
+    private SQLiteDatabase mDatabase;
 
     private DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        mOpenCounter = new AtomicInteger();
     }
 
-    public synchronized static DatabaseHelper getInstance(Context context) {
+    public synchronized static DatabaseHelper getInstance() {
 
         if (databaseHelper == null) {
-            databaseHelper = new DatabaseHelper(context.getApplicationContext());
+            databaseHelper = new DatabaseHelper(ManageProductApplication.getInstance().getContext());
         }
 
         return databaseHelper;
     }
 
+    public synchronized SQLiteDatabase openDatabase() {
+        if (mOpenCounter.incrementAndGet() == 1) {
+            mDatabase = getWritableDatabase();
+        }
+
+        return mDatabase;
+    }
+
+    public synchronized void closeDatabase() {
+        if (mOpenCounter.decrementAndGet() == 0) {
+            mDatabase.close();
+        }
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(ManageProductContract.CategoryEntry.SQL_CREATE_ENTRIES);
-        db.execSQL(ManageProductContract.ProductEntry.SQL_CREATE_ENTRIES);
+        try {
+            db.beginTransaction();
+            db.execSQL(ManageProductContract.CategoryEntry.SQL_CREATE_ENTRIES);
+            db.execSQL(ManageProductContract.ProductEntry.SQL_CREATE_ENTRIES);
+            db.execSQL(ManageProductContract.PharmacyEntry.SQL_CREATE_ENTRIES);
+            db.execSQL(ManageProductContract.Invoice.SQL_CREATE_ENTRIES);
+            db.execSQL(ManageProductContract.InvoiceLineEntry.SQL_CREATE_ENTRIES);
+            db.execSQL(ManageProductContract.InvoiceStatus.SQL_CREATE_ENTRIES);
+        } catch (SQLiteException e) {
+            Log.e("ManageProductDatabase: ", "Error al crear la base de datos -> " + e.getMessage());
+        } finally {
+            db.endTransaction();
+        }
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(ManageProductContract.ProductEntry.SQL_DROP_TABLE);
-        db.execSQL(ManageProductContract.ProductEntry.SQL_CREATE_ENTRIES);
-        onCreate(db);
+        try {
+            db.beginTransaction();
+            db.execSQL(ManageProductContract.CategoryEntry.SQL_DROP_TABLE);
+            db.execSQL(ManageProductContract.ProductEntry.SQL_DROP_TABLE);
+            db.execSQL(ManageProductContract.PharmacyEntry.SQL_DROP_TABLE);
+            db.execSQL(ManageProductContract.Invoice.SQL_DROP_TABLE);
+            db.execSQL(ManageProductContract.InvoiceLineEntry.SQL_DROP_TABLE);
+            db.execSQL(ManageProductContract.InvoiceStatus.SQL_DROP_TABLE);
+            db.setTransactionSuccessful();
+            onCreate(db);
+        } catch (SQLException e) {
+            Log.e("ManageProductDatabase: ", "Error al actualizar la base de datos -> " + e.getMessage());
+        } finally {
+            db.endTransaction();
+        }
+
+
     }
 
     @Override

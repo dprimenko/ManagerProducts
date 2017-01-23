@@ -3,6 +3,7 @@ package com.example.managerproducts.presenter;
 import android.text.BoringLayout;
 import android.util.Log;
 
+import com.example.managerproducts.DatabaseManager;
 import com.example.managerproducts.interfaces.IListProductMvp;
 import com.example.managerproducts.interfaces.IMultiListProductMvp;
 import com.example.managerproducts.model.Product;
@@ -49,6 +50,28 @@ public class MultiListProductPresenter implements IMultiListProductMvp.Presenter
         listSelectionProducts.clear();
     }
 
+    @Override
+    public void addProduct(Product product) {
+        view.getAdapter().addProduct(product);
+    }
+
+    @Override
+    public void restoreProducts(ArrayList<Product> products) {
+        for (Product product:products) {
+            view.getAdapter().addProduct(product);
+        }
+    }
+
+    @Override
+    public void getAllProducts() {
+
+        view.getAdapter().addList();
+    }
+
+    @Override
+    public void updateProduct(Product product) {
+        view.getAdapter().updateProduct(product);
+    }
 
     @Override
     public void deleteMultipleProducts() {
@@ -65,22 +88,5 @@ public class MultiListProductPresenter implements IMultiListProductMvp.Presenter
 
             view.showUndoSnackbar(products);
         }
-    }
-
-    @Override
-    public void addProduct(Product product) {
-        view.getAdapter().addProduct(product);
-    }
-
-    @Override
-    public void restoreProducts(ArrayList<Product> products) {
-        for (Product product:products) {
-            view.getAdapter().addProduct(product);
-        }
-    }
-
-    @Override
-    public void updateProduct() {
-
     }
 }
