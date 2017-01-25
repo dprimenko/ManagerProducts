@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.util.Log;
 
+import com.example.managerproducts.DatabaseManager;
 import com.example.managerproducts.ManageProductApplication;
 import com.example.managerproducts.schema.ManageProductContract;
 
@@ -30,21 +31,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private AtomicInteger mOpenCounter;
     private SQLiteDatabase mDatabase;
 
-    private DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    private DatabaseHelper() {
+        super(ManageProductApplication.getContext().getApplicationContext(), DATABASE_NAME, null, DATABASE_VERSION);
         mOpenCounter = new AtomicInteger();
     }
 
     public synchronized static DatabaseHelper getInstance() {
 
         if (databaseHelper == null) {
-            databaseHelper = new DatabaseHelper(ManageProductApplication.getInstance().getContext());
+            databaseHelper = new DatabaseHelper();
         }
 
         return databaseHelper;
     }
 
     public synchronized SQLiteDatabase openDatabase() {
+
         if (mOpenCounter.incrementAndGet() == 1) {
             mDatabase = getWritableDatabase();
         }
@@ -62,13 +64,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         try {
             db.beginTransaction();
-            db.execSQL(ManageProductContract.CategoryEntry.SQL_CREATE_ENTRIES);
+            db.execSQL("CREATE TABLE `t` (\n" +
+                    "\t`a`\tINTEGER,\n" +
+                    "\t`b`\tTEXT,\n" +
+                    "\tPRIMARY KEY(`a`)\n" +
+                    ");");
+            Log.d("Hola", "caracola");
+            /*db.execSQL(ManageProductContract.CategoryEntry.SQL_CREATE_ENTRIES);
             db.execSQL(ManageProductContract.ProductEntry.SQL_CREATE_ENTRIES);
             db.execSQL(ManageProductContract.PharmacyEntry.SQL_CREATE_ENTRIES);
-            db.execSQL(ManageProductContract.Invoice.SQL_CREATE_ENTRIES);
-            db.execSQL(ManageProductContract.InvoiceLineEntry.SQL_CREATE_ENTRIES);
-            db.execSQL(ManageProductContract.InvoiceStatus.SQL_CREATE_ENTRIES);
+            //db.execSQL(ManageProductContract.Invoice.SQL_CREATE_ENTRIES);
+            //db.execSQL(ManageProductContract.InvoiceLineEntry.SQL_CREATE_ENTRIES);
+            //db.execSQL(ManageProductContract.InvoiceStatus.SQL_CREATE_ENTRIES);*/
         } catch (SQLiteException e) {
+            e.printStackTrace();
             Log.e("ManageProductDatabase: ", "Error al crear la base de datos -> " + e.getMessage());
         } finally {
             db.endTransaction();
@@ -111,9 +120,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 db.execSQL("PRAGMA foreign_keys = ON");
             }
         }
-    }
-
-    public SQLiteDatabase open() {
-        return getWritableDatabase();
     }
 }

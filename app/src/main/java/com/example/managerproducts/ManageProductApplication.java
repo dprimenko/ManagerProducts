@@ -11,26 +11,19 @@ import com.example.managerproducts.dao.DatabaseHelper;
 
 public class ManageProductApplication extends Application {
 
-    private static ManageProductApplication application;
+    private static ManageProductApplication singleton;
 
-    private ManageProductApplication () {
-    }
-
-    public static ManageProductApplication getInstance() {
-
-        if (application == null) {
-            application = new ManageProductApplication();
-        }
-        return application;
+    public ManageProductApplication() {
+        singleton = this;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        DatabaseHelper.getInstance().open();
+        DatabaseHelper.getInstance().openDatabase();
     }
 
-    public Context getContext() {
-        return this;
+    public static Context getContext() {
+        return singleton;
     }
 }
