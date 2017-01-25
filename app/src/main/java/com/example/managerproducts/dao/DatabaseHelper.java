@@ -63,24 +63,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         try {
+            db = DatabaseHelper.getInstance().openDatabase();
             db.beginTransaction();
-            db.execSQL("CREATE TABLE `t` (\n" +
-                    "\t`a`\tINTEGER,\n" +
-                    "\t`b`\tTEXT,\n" +
-                    "\tPRIMARY KEY(`a`)\n" +
-                    ");");
-            Log.d("Hola", "caracola");
-            /*db.execSQL(ManageProductContract.CategoryEntry.SQL_CREATE_ENTRIES);
+            db.execSQL(ManageProductContract.CategoryEntry.SQL_CREATE_ENTRIES);
             db.execSQL(ManageProductContract.ProductEntry.SQL_CREATE_ENTRIES);
             db.execSQL(ManageProductContract.PharmacyEntry.SQL_CREATE_ENTRIES);
-            //db.execSQL(ManageProductContract.Invoice.SQL_CREATE_ENTRIES);
-            //db.execSQL(ManageProductContract.InvoiceLineEntry.SQL_CREATE_ENTRIES);
-            //db.execSQL(ManageProductContract.InvoiceStatus.SQL_CREATE_ENTRIES);*/
+            db.execSQL(ManageProductContract.Invoice.SQL_CREATE_ENTRIES);
+            db.execSQL(ManageProductContract.InvoiceLineEntry.SQL_CREATE_ENTRIES);
+            db.execSQL(ManageProductContract.InvoiceStatus.SQL_CREATE_ENTRIES);
         } catch (SQLiteException e) {
             e.printStackTrace();
             Log.e("ManageProductDatabase: ", "Error al crear la base de datos -> " + e.getMessage());
         } finally {
             db.endTransaction();
+            DatabaseHelper.getInstance().closeDatabase();
         }
 
     }
@@ -88,6 +84,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         try {
+            db = DatabaseHelper.getInstance().openDatabase();
             db.beginTransaction();
             db.execSQL(ManageProductContract.CategoryEntry.SQL_DROP_TABLE);
             db.execSQL(ManageProductContract.ProductEntry.SQL_DROP_TABLE);
@@ -101,6 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Log.e("ManageProductDatabase: ", "Error al actualizar la base de datos -> " + e.getMessage());
         } finally {
             db.endTransaction();
+            DatabaseHelper.getInstance().closeDatabase();
         }
 
 
@@ -108,11 +106,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db = DatabaseHelper.getInstance().openDatabase();
         onUpgrade(db, newVersion, oldVersion);
+        DatabaseHelper.getInstance().closeDatabase();
     }
 
     @Override
     public void onOpen(SQLiteDatabase db) {
+        db = DatabaseHelper.getInstance().openDatabase();
         if (!db.isReadOnly()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 db.setForeignKeyConstraintsEnabled(true);
@@ -120,5 +121,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 db.execSQL("PRAGMA foreign_keys = ON");
             }
         }
+        DatabaseHelper.getInstance().closeDatabase();
     }
 }

@@ -20,7 +20,7 @@ public class ManageProductApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        DatabaseHelper.getInstance().openDatabase();
+        DatabaseHelper.getInstance();
     }
 
     public static Context getContext() {
