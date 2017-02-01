@@ -1,9 +1,14 @@
 package com.example.managerproducts.presenter;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import android.provider.ContactsContract;
 import android.text.BoringLayout;
 import android.util.Log;
 
 import com.example.managerproducts.DatabaseManager;
+import com.example.managerproducts.ManageProductApplication;
+import com.example.managerproducts.R;
 import com.example.managerproducts.interfaces.IListProductMvp;
 import com.example.managerproducts.interfaces.IMultiListProductMvp;
 import com.example.managerproducts.model.Product;
@@ -23,6 +28,7 @@ public class MultiListProductPresenter implements IMultiListProductMvp.Presenter
 
     private IMultiListProductMvp.View view;
     private Map<Integer,Boolean> listSelectionProducts;
+    public List<Product> productList;
 
     public static final int ADD_PRODUCT_REQUEST = 10;
     public static final int EDIT_PRODUCT_REQUEST = 11;
@@ -52,7 +58,11 @@ public class MultiListProductPresenter implements IMultiListProductMvp.Presenter
 
     @Override
     public void addProduct(Product product) {
-        view.getAdapter().addProduct(product);
+        DatabaseManager.getInstance().insertProduct(product);
+    }
+
+    public void addCategory(String category) {
+        DatabaseManager.getInstance().insertCategory(category);
     }
 
     @Override
@@ -64,8 +74,7 @@ public class MultiListProductPresenter implements IMultiListProductMvp.Presenter
 
     @Override
     public void getAllProducts() {
-
-        view.getAdapter().addList();
+        new GetAllProducts().execute();
     }
 
     @Override
@@ -87,6 +96,25 @@ public class MultiListProductPresenter implements IMultiListProductMvp.Presenter
             }
 
             view.showUndoSnackbar(products);
+        }
+    }
+
+    class GetAllProducts extends AsyncTask {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Object[] params) {
+            view.getAdapter().addList(DatabaseManager.getInstance().getAllProducts());
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
         }
     }
 }

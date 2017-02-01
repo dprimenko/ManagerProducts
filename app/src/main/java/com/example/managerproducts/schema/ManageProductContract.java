@@ -18,7 +18,7 @@ public final class ManageProductContract {
         public static final String TABLE_NAME = "category";
         public static final String COLUMN_NAME = "name";
 
-        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
+        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "%s TEXT NOT NULL)",
                 TABLE_NAME, BaseColumns._ID,
                 COLUMN_NAME);
@@ -38,7 +38,7 @@ public final class ManageProductContract {
         public static final String COLUMN_IDCATEGORY = "idCategory";
         public static final String REFERENCE_ID_CATEGORY = String.format("REFERENCES %s (%s) ON UPDATE CASCADE ON DELETE RESTRICT", CategoryEntry.TABLE_NAME, BaseColumns._ID);
 
-        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
+        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "%s TEXT NOT NULL," +
                 "%s TEXT NOT NULL," +
                 "%s TEXT NOT NULL," +
@@ -59,6 +59,8 @@ public final class ManageProductContract {
                 REFERENCE_ID_CATEGORY);
 
         public static final String SQL_DROP_TABLE = String.format("DROP TABLE IF EXISTS %s", TABLE_NAME);
+
+        public static final String SQL_SELECT_ALL = String.format("SELECT * FROM %s", TABLE_NAME);
     }
 
     public static class PharmacyEntry implements BaseColumns {
@@ -68,7 +70,7 @@ public final class ManageProductContract {
         public static final String COLUMN_PHONENUMBER = "phoneNumber";
         public static final String COLUMN_EMAIL = "email";
 
-        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
+        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "%s TEXT NOT NULL," +
                 "%s TEXT NOT NULL," +
                 "%s TEXT NOT NULL," +
@@ -88,7 +90,7 @@ public final class ManageProductContract {
         public static final String COLUMN_IDPHARMACY = "idPharma";
         public static final String REFERENCE_ID_PHARMACY = String.format("REFERENCES %s (%s) ON UPDATE CASCADE ON DELETE RESTRICT", PharmacyEntry.TABLE_NAME, BaseColumns._ID);
 
-        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
+        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "%s INTEGER NOT NULL %s," +
                 "%s DATE NOT NULL)",
                 TABLE_NAME, BaseColumns._ID,
@@ -103,7 +105,7 @@ public final class ManageProductContract {
         public static final String TABLE_NAME = "invoiceStatus";
         public static final String COLUMN_NAME = "name";
 
-        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
+        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "%s TEXT NOT NULL)",
                 TABLE_NAME, BaseColumns._ID,
                 COLUMN_NAME);
@@ -119,7 +121,7 @@ public final class ManageProductContract {
         public static final String REFERENCE_ID_PRODUCT = String.format("REFERENCES %s (%s) ON UPDATE CASCADE ON DELETE RESTRICT", ProductEntry.TABLE_NAME, BaseColumns._ID);
         public static final String COLUMN_PRICE = "price";
 
-        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE %s (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
+        public static final String SQL_CREATE_ENTRIES = String.format("CREATE TABLE IF NOT EXISTS %s (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
                         "%s INTEGER NOT NULL," +
                 "%s INTEGER NOT NULL %s," +
                 "%s REAL NOT NULL)",

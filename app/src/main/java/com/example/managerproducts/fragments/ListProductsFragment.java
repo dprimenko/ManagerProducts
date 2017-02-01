@@ -1,7 +1,6 @@
 package com.example.managerproducts.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -14,8 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.example.managerproducts.GeneralSettings_Activity;
-import com.example.managerproducts.ProductsRepository;
 import com.example.managerproducts.R;
 import com.example.managerproducts.adapter.ProductAdapter;
 

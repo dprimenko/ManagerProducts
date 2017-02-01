@@ -30,8 +30,8 @@ public class ManageProductPresenter implements IManageProductMvp.Presenter{
         }
         else {
             double priceParsed = Double.parseDouble(price);
-            Product product = new Product(name, description, brand, concentration, priceParsed, new Random().nextInt(100), R.drawable.defecto);
-            view.backToListProductFragment(product, request);
+            //Product product = new Product(name, description, brand, concentration, priceParsed, new Random().nextInt(100), R.drawable.defecto);
+            //view.backToListProductFragment(product, request);
         }
     }
 

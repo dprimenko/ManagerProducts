@@ -3,75 +3,12 @@
 
     <item
         is-multidex="false"
-        jar="/home/dprimenko/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/jars/libs/internal_impl-23.2.1.jar"
+        jar="/home/usuario/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.3"
-        sha1="607a3d0b8013b4ccbfeb0b7cb293351994e021fb">
-        <dex dex="/home/dprimenko/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/pre-dexed/debug/internal_impl-23.2.1_c12d564fb8e8ef39d45a3fc3a267f314658ebcea.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/dprimenko/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.2.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="e3885783ff8926ed9e2fdcd16816c2e1e73e7aee">
-        <dex dex="/home/dprimenko/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.2.1_3742c5da9eb09cbdba3411e9735e7510095ec9f4.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/dprimenko/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="e4d0cbb0b999604b349062f0214a0a228a7fd151">
-        <dex dex="/home/dprimenko/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.2.1_3027090c2a4409ad3ff3d9cec06f08aec9da0d85.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/dprimenko/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.2.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="3469cb457f10f74c28cbc05f069b6c894f6cbdd0">
-        <dex dex="/home/dprimenko/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.2.1_16905fcdadac6d29471507cd4561d30faf9fdba8.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/dprimenko/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="3be474b1b21b31cf2fa93fe6bd641ae108d96452">
-        <dex dex="/home/dprimenko/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.2.1_db22da90fea371e8e509dfc2dd6f32b5312c1c18.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/dprimenko/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/design/23.2.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="72961d8b453b46e277702f18de9d210bc019e36e">
-        <dex dex="/home/dprimenko/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/pre-dexed/debug/com.android.support-design-23.2.1_60433221261c8af2a8c839ba70058d2331a2cbf3.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/dprimenko/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.2.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="673d77a5bbddd766037f088e775df525c46407f0">
-        <dex dex="/home/dprimenko/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.2.1_f1ce0851a9b23731bb7f2f36b8624209a9b1dbb0.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/dprimenko/Desarrollo/AndroidSdk/extras/android/m2repository/com/android/support/support-annotations/23.2.1/support-annotations-23.2.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.3"
-        sha1="ccb693bc0774fcb637246f7360de25b4af7df318">
-        <dex dex="/home/dprimenko/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/pre-dexed/debug/support-annotations-23.2.1_0d2461393f1d34a1a5487d6c87688240deacc9b9.jar" />
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="/home/usuario/Desarrollo/AndroidStudioProjects/ManagerProducts/app/build/intermediates/pre-dexed/debug/picasso-2.5.2_0cacf4eaa94c9d0079a4d37f81d36447392213f0.jar" />
     </item>
 
 </items>

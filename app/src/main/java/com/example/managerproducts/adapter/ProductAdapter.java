@@ -2,7 +2,6 @@ package com.example.managerproducts.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.managerproducts.DatabaseManager;
-import com.example.managerproducts.ProductsRepository;
 import com.example.managerproducts.R;
 import com.example.managerproducts.model.Product;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -30,9 +29,9 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         super(context, resource);
     }
 
-    public void addList() {
+    public void addList(List<Product> products) {
         clear();
-        addAll(DatabaseManager.getInstance().getAllProducts());
+        addAll(products);
     }
 
     //region Lo más eficiente!!
@@ -67,7 +66,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
         //region 4. Asignar datos del adapter a los widget
 
-        productHolder.imgProduct.setImageResource(getItem(position).getmImage());
+        Picasso.with(getContext()).load(getItem(position).getmImage()).into(productHolder.imgProduct);
         productHolder.txvTitle.setText(getItem(position).getmName());
         productHolder.txvPrice.setText(getItem(position).getFormattedPrice());
         productHolder.txvStock.setText(getItem(position).getFormattedStock());

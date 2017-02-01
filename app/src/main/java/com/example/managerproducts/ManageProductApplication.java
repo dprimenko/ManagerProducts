@@ -17,13 +17,7 @@ public class ManageProductApplication extends Application {
         singleton = this;
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        DatabaseHelper.getInstance();
-    }
-
-    public static Context getContext() {
+     public static Context getContext() {
         return singleton;
     }
 }

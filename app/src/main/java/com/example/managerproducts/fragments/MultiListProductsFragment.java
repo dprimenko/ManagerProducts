@@ -66,6 +66,7 @@ public class MultiListProductsFragment extends Fragment implements SimpleMultiCh
         setHasOptionsMenu(true);
         adapter = new ProductAdapter(getActivity(), R.layout.item_list_product);
         getRequestManageProduct();
+        presenter.getAllProducts();
     }
 
     @Override

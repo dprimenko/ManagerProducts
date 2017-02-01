@@ -1,5 +1,6 @@
 package com.example.managerproducts.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,8 +21,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "ManageProduct.db";
+    private static final int DATABASE_VERSION = 32;
+    private static final String DATABASE_NAME = "manageproduct.db";
     /**
      * Se debe de poner volatile porque un hilo que este esperando
      * puede tener cacheado el valor null de la constante y volver a inicializarla
@@ -32,7 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private SQLiteDatabase mDatabase;
 
     private DatabaseHelper() {
-        super(ManageProductApplication.getContext().getApplicationContext(), DATABASE_NAME, null, DATABASE_VERSION);
+        super(ManageProductApplication.getContext(), DATABASE_NAME, null, DATABASE_VERSION);
         mOpenCounter = new AtomicInteger();
     }
 
@@ -63,7 +64,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         try {
-            db = DatabaseHelper.getInstance().openDatabase();
             db.beginTransaction();
             db.execSQL(ManageProductContract.CategoryEntry.SQL_CREATE_ENTRIES);
             db.execSQL(ManageProductContract.ProductEntry.SQL_CREATE_ENTRIES);
@@ -71,20 +71,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL(ManageProductContract.Invoice.SQL_CREATE_ENTRIES);
             db.execSQL(ManageProductContract.InvoiceLineEntry.SQL_CREATE_ENTRIES);
             db.execSQL(ManageProductContract.InvoiceStatus.SQL_CREATE_ENTRIES);
+            db.setTransactionSuccessful();
         } catch (SQLiteException e) {
             e.printStackTrace();
             Log.e("ManageProductDatabase: ", "Error al crear la base de datos -> " + e.getMessage());
         } finally {
             db.endTransaction();
-            DatabaseHelper.getInstance().closeDatabase();
         }
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         try {
-            db = DatabaseHelper.getInstance().openDatabase();
             db.beginTransaction();
             db.execSQL(ManageProductContract.CategoryEntry.SQL_DROP_TABLE);
             db.execSQL(ManageProductContract.ProductEntry.SQL_DROP_TABLE);
@@ -93,34 +91,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL(ManageProductContract.InvoiceLineEntry.SQL_DROP_TABLE);
             db.execSQL(ManageProductContract.InvoiceStatus.SQL_DROP_TABLE);
             db.setTransactionSuccessful();
+            db.endTransaction();
             onCreate(db);
         } catch (SQLException e) {
             Log.e("ManageProductDatabase: ", "Error al actualizar la base de datos -> " + e.getMessage());
         } finally {
             db.endTransaction();
-            DatabaseHelper.getInstance().closeDatabase();
         }
-
-
     }
 
     @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db = DatabaseHelper.getInstance().openDatabase();
         onUpgrade(db, newVersion, oldVersion);
-        DatabaseHelper.getInstance().closeDatabase();
     }
 
     @Override
     public void onOpen(SQLiteDatabase db) {
-        db = DatabaseHelper.getInstance().openDatabase();
         if (!db.isReadOnly()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 db.setForeignKeyConstraintsEnabled(true);
             } else {
+                db.beginTransaction();
                 db.execSQL("PRAGMA foreign_keys = ON");
+                db.setTransactionSuccessful();
+                db.endTransaction();
             }
         }
-        DatabaseHelper.getInstance().closeDatabase();
+    }
+
+    public SQLiteDatabase open() {
+        return getWritableDatabase();
     }
 }
