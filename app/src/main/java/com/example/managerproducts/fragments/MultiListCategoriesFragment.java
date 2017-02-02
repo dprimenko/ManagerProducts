@@ -1,11 +1,13 @@
 package com.example.managerproducts.fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.managerproducts.R;
@@ -32,22 +36,20 @@ import java.util.ArrayList;
  * Created by usuario on 2/02/17.
  */
 
-public class MultiListCategoriesFragment extends Fragment implements IMultiListCategoryMvp.View {
+public class MultiListCategoriesFragment extends Fragment implements IMultiListCategoryMvp.View, SimpleMultiChoiceModeListener.StateContextMenuListener {
 
     private FloatingActionButton btnAddCategory;
     private ListView lwCategories;
     private CategoryAdapter adapter;
-    private MultiListCategoriesFragmentListener mCallback;
     private MultiListCategoryPresenter presenter;
+    private EditText edtAddCategory;
+    private LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
 
     @Override
     public CategoryAdapter getAdapter() {
         return adapter;
     }
 
-    public interface MultiListCategoriesFragmentListener {
-        void onManageCategoryFragmentListener(Bundle bundle);
-    }
 
     public static MultiListCategoriesFragment newInstance(Bundle bundle) {
         MultiListCategoriesFragment manageCategoryFragment = new MultiListCategoriesFragment();
@@ -64,24 +66,13 @@ public class MultiListCategoriesFragment extends Fragment implements IMultiListC
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         adapter = new CategoryAdapter(getActivity(), R.layout.support_simple_spinner_dropdown_item);
-        getRequestManageProduct();
         presenter.getAllCategories();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        try {
-            mCallback = (MultiListCategoriesFragmentListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement MultiListCategoriesFragmentListener");
-        }
-    }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_list_categories, container, false);
 
@@ -90,11 +81,28 @@ public class MultiListCategoriesFragment extends Fragment implements IMultiListC
             btnAddCategory = (FloatingActionButton) rootView.findViewById(R.id.btn_add_category);
 
             lwCategories.setAdapter(adapter);
-
+            edtAddCategory = (EditText) rootView.findViewById(R.id.edt_add_category);
             btnAddCategory.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mCallback.onManageCategoryFragmentListener(null);
+                    //inputCategory.setLayoutParams(lp);
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("Añadir categoria");
+                    builder.setMessage("¿Seguro que quiere añadir la categoría?");
+                    //builder.setView(inputCategory);
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            presenter.addCategory(edtAddCategory.getText().toString());
+                            presenter.getAllCategories();
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    builder.show();
                 }
             });
         }
@@ -127,7 +135,6 @@ public class MultiListCategoriesFragment extends Fragment implements IMultiListC
     @Override
     public void onDetach() {
         super.onDetach();
-        mCallback = null;
     }
 
     @Override
@@ -165,17 +172,38 @@ public class MultiListCategoriesFragment extends Fragment implements IMultiListC
                 }).show();
     }
 
-    private void getRequestManageProduct() {
+    @Override
+    public void onCreatedContextMenu() {
+        btnAddCategory.setVisibility(View.GONE);
+    }
 
-        if (getArguments() != null) {
-            Category category = ((Category)getArguments().getParcelable("category_key"));
-
-            if (getArguments().getInt("manage_request") == MultiListProductPresenter.ADD_PRODUCT_REQUEST) {
-                presenter.addCategory(category);
-            }
-            else if (getArguments().getInt("manage_request") == MultiListProductPresenter.EDIT_PRODUCT_REQUEST) {
-            }
+    @Override
+    public void onItemCheckedStateChanged(int position, boolean checked) {
+        if (checked) {
+            presenter.setNewSelection(position, checked);
+        } else  {
+            presenter.removeSelection(position);
         }
+    }
+
+    @Override
+    public void onPrepareActionModeContextMenu() {
+
+    }
+
+    @Override
+    public void onActionItemClicked(int action) {
+        switch (action) {
+            case MultiListProductPresenter.DELETE_MULTIPLE_ITEMS:
+                presenter.deleteMultipleCategories();
+                break;
+        }
+    }
+
+    @Override
+    public void onDestroyedContextMenu() {
+        btnAddCategory.setVisibility(View.VISIBLE);
+        presenter.clearSelection();
     }
 
     private void scrollDown() {

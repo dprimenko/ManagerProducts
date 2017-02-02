@@ -27,9 +27,15 @@ import java.util.ListIterator;
 
 public class DatabaseManager {
 
+    private DatabaseManagerListener databaseManagerListener;
+
     private static DatabaseManager databaseManager;
 
     private DatabaseManager () {
+    }
+
+    public interface DatabaseManagerListener {
+        void onSuccessQuery();
     }
 
     public static DatabaseManager getInstance() {
@@ -124,7 +130,6 @@ public class DatabaseManager {
     }
 
     public int insertCategory(String category) {
-
         int result;
         SQLiteDatabase db = null;
         db = DatabaseHelper.getInstance().openDatabase();

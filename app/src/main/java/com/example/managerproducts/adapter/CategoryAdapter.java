@@ -24,7 +24,7 @@ public class CategoryAdapter extends ArrayAdapter {
     }
 
     public void addList(List<Category> categories) {
-        clear();
+        this.clear();
         addAll(categories);
     }
 

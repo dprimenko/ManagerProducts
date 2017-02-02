@@ -28,7 +28,7 @@ public interface IMultiListCategoryMvp {
 
         void restoreCategories(ArrayList<Category> categories);
 
-        void addCategory(Category category);
+        void addCategory(String category);
         void getAllCategories();
         void updateCategory(Category category);
     }

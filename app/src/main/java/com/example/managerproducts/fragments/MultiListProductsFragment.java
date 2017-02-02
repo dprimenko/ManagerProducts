@@ -46,6 +46,7 @@ public class MultiListProductsFragment extends Fragment implements SimpleMultiCh
         return adapter;
     }
 
+
     public interface MultiListProductFragmentListener {
         void onManageProductFragmentListener(Bundle bundle);
     }

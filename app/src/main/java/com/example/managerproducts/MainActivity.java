@@ -15,7 +15,9 @@ import android.view.MenuItem;
 
 import com.example.managerproducts.fragments.ListProductsFragment;
 import com.example.managerproducts.fragments.ManageProductFragment;
+import com.example.managerproducts.fragments.MultiListCategoriesFragment;
 import com.example.managerproducts.fragments.MultiListProductsFragment;
+import com.example.managerproducts.presenter.MultiListCategoryPresenter;
 
 /**
  * Created by dprimenko on 15/12/16.
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements MultiListProducts
     private ListProductsFragment listProductsFragment;
     private ManageProductFragment manageProductFragment;
     private MultiListProductsFragment multiListProductsFragment;
+    private MultiListCategoriesFragment multiListCategoriesFragment;
     private NavigationView mNav;
     private DrawerLayout mDrawer;
     private Toolbar toolbar_main;
@@ -70,6 +73,13 @@ public class MainActivity extends AppCompatActivity implements MultiListProducts
         ft.commit();
     }
 
+    public void onMultiListCategoryFragment(Bundle bundle) {
+        multiListCategoriesFragment = MultiListCategoriesFragment.newInstance(bundle);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fl_main, multiListCategoriesFragment);
+        ft.commit();
+    }
+
     @Override
     public void onManageProductFragmentListener(Bundle bundle) {
         manageProductFragment = ManageProductFragment.newInstance(null);
@@ -96,6 +106,9 @@ public class MainActivity extends AppCompatActivity implements MultiListProducts
                         break;
                     case R.id.action_sales:
                         //showSales();
+                        break;
+                    case R.id.action_categories:
+                        onMultiListCategoryFragment(null);
                         break;
                     default:
                         item.setChecked(false);

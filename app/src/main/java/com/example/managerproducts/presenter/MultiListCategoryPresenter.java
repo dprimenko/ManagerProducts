@@ -71,8 +71,8 @@ public class MultiListCategoryPresenter implements IMultiListCategoryMvp.Present
     }
 
     @Override
-    public void addCategory(Category category) {
-        DatabaseManager.getInstance().insertCategory(category.getmName());
+    public void addCategory(String category) {
+        DatabaseManager.getInstance().insertCategory(category);
     }
 
     @Override
