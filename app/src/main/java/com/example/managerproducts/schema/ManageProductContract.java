@@ -24,6 +24,7 @@ public final class ManageProductContract {
                 COLUMN_NAME);
 
         public static final String SQL_DROP_TABLE = String.format("DROP TABLE IF EXISTS %s", TABLE_NAME);
+        public static final String SQL_SELECT_ALL = String.format("SELECT * FROM %s", TABLE_NAME);
     }
 
     public static class ProductEntry implements BaseColumns {

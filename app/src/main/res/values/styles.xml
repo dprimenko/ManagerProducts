@@ -8,6 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:actionModeStyle">@style/Widget.ActionMode</item>
         <item name="actionModeStyle">@style/Widget.ActionMode</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <!-- Para cambiar el boton back de la barra de acción-->
         <!--<item name="android:actionModeCloseDrawable"></item>-->
     </style>

@@ -6,14 +6,20 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.managerproducts.dao.DatabaseHelper;
+import com.example.managerproducts.model.Category;
+import com.example.managerproducts.model.Pharmacy;
 import com.example.managerproducts.model.Product;
 import com.example.managerproducts.schema.ManageProductContract;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Created by usuario on 23/01/17.
@@ -59,13 +65,70 @@ public class DatabaseManager {
         return productList;
     }
 
-    public int insertCategory(String category) {
+    public List<Category> getAllCategories() {
+        List<Category> categoriesList = new ArrayList<>();
 
+        SQLiteDatabase db = DatabaseHelper.getInstance().openDatabase();
+        Cursor cursor = db.rawQuery(ManageProductContract.CategoryEntry.SQL_SELECT_ALL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Category category = new Category();
+                category.setmId(String.valueOf(cursor.getInt(cursor.getColumnIndex(ManageProductContract.CategoryEntry._ID))));
+                category.setmName(cursor.getString(cursor.getColumnIndex(ManageProductContract.CategoryEntry.COLUMN_NAME)));
+
+                categoriesList.add(category);
+            } while (cursor.moveToNext());
+        }
+
+        return categoriesList;
+    }
+
+    public List<Pharmacy> getPharmacies() {
+        List<Pharmacy> pharmaciesList = new ArrayList<>();
+
+        SQLiteDatabase db = DatabaseHelper.getInstance().openDatabase();
+        Cursor cursor = db.rawQuery(ManageProductContract.CategoryEntry.SQL_SELECT_ALL, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Pharmacy pharmacy = new Pharmacy();
+                pharmacy.setmId(String.valueOf(cursor.getInt(cursor.getColumnIndex(ManageProductContract.CategoryEntry._ID))));
+                pharmacy.setmCif(cursor.getString(cursor.getColumnIndex(ManageProductContract.PharmacyEntry.COLUMN_CIF)));
+                pharmacy.setmAddress(cursor.getString(cursor.getColumnIndex(ManageProductContract.PharmacyEntry.COLUMN_ADDRESS)));
+                pharmacy.setmPhoneNumber(cursor.getString(cursor.getColumnIndex(ManageProductContract.PharmacyEntry.COLUMN_PHONENUMBER)));
+                pharmacy.setmEmail(cursor.getString(cursor.getColumnIndex(ManageProductContract.PharmacyEntry.COLUMN_EMAIL)));
+                pharmaciesList.add(pharmacy);
+            } while (cursor.moveToNext());
+        }
+
+        return pharmaciesList;
+    }
+
+    public int insertPharmacy(Pharmacy pharmacy) {
         int result;
         SQLiteDatabase db = null;
         ContentValues contentValues = new ContentValues();
 
         db = DatabaseHelper.getInstance().openDatabase();
+
+        contentValues.put(ManageProductContract.PharmacyEntry.COLUMN_CIF, pharmacy.getmCif());
+        contentValues.put(ManageProductContract.PharmacyEntry.COLUMN_ADDRESS, pharmacy.getmAddress());
+        contentValues.put(ManageProductContract.PharmacyEntry.COLUMN_PHONENUMBER, pharmacy.getmPhoneNumber());
+        contentValues.put(ManageProductContract.PharmacyEntry.COLUMN_EMAIL, pharmacy.getmEmail());
+
+        result = (int)db.insert(ManageProductContract.PharmacyEntry.TABLE_NAME, null, contentValues);
+        DatabaseHelper.getInstance().closeDatabase();
+        Log.d("ResultPharmacy: ", String.valueOf(result));
+        return result;
+    }
+
+    public int insertCategory(String category) {
+
+        int result;
+        SQLiteDatabase db = null;
+        db = DatabaseHelper.getInstance().openDatabase();
+        ContentValues contentValues = new ContentValues();
 
         contentValues.put(ManageProductContract.CategoryEntry.COLUMN_NAME, category);
 
