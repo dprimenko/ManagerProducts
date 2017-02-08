@@ -1,12 +1,10 @@
 package com.example.managerproducts.presenter;
 
 import android.os.AsyncTask;
-import android.provider.ContactsContract;
 
-import com.example.managerproducts.DatabaseManager;
+import com.example.managerproducts.db.DatabaseManager;
 import com.example.managerproducts.interfaces.IMultiListCategoryMvp;
 import com.example.managerproducts.model.Category;
-import com.example.managerproducts.model.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;

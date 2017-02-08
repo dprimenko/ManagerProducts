@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.managerproducts.DatabaseManager;
 import com.example.managerproducts.R;
 import com.example.managerproducts.model.Product;
 import com.squareup.picasso.Picasso;

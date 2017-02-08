@@ -1,15 +1,8 @@
 package com.example.managerproducts.presenter;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.provider.ContactsContract;
-import android.text.BoringLayout;
-import android.util.Log;
 
-import com.example.managerproducts.DatabaseManager;
-import com.example.managerproducts.ManageProductApplication;
-import com.example.managerproducts.R;
-import com.example.managerproducts.interfaces.IListProductMvp;
+import com.example.managerproducts.db.DatabaseManager;
 import com.example.managerproducts.interfaces.IMultiListProductMvp;
 import com.example.managerproducts.model.Product;
 
@@ -17,8 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.StringTokenizer;
 
 /**
  * Created by usuario on 16/12/16.

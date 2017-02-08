@@ -1,16 +1,10 @@
 package com.example.managerproducts.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.example.managerproducts.DatabaseManager;
+import com.example.managerproducts.db.DatabaseManager;
 import com.example.managerproducts.model.Category;
-import com.example.managerproducts.model.Product;
 
 import java.util.List;
 
