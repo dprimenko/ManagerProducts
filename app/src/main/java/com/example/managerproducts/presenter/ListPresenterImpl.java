@@ -7,30 +7,34 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 
+import com.example.managerproducts.db.DatabaseContract;
 import com.example.managerproducts.interfaces.ICategoryPresenter;
+import com.example.managerproducts.interfaces.IListPresenter;
+import com.example.managerproducts.interfaces.IListProductMvp;
 import com.example.managerproducts.provider.ManageProductContract;
 
 /**
  * Created by usuario on 8/02/17.
  */
 
-public class ListPresenterImpl implements LoaderManager.LoaderCallbacks<Cursor> {
+public class ListPresenterImpl implements LoaderManager.LoaderCallbacks<Cursor>, IListPresenter {
 
-    private ICategoryPresenter.View view;
+    private IListPresenter.View view;
     private final static int CATEGORY = 1;
+    private final static int PRODUCT = 2;
     private Context context;
 
 
-    public ListPresenterImpl(ICategoryPresenter.View view){
+    public ListPresenterImpl(IListPresenter.View view){
 
         this.view = view;
         this.context = view.getContext();
     }
 
-    @Override
+    /*@Override
     public void onDestroy() {
         this.view = null;
-    }
+    }*/
 
     @Override
     public Loader onCreateLoader(int id, Bundle args) {
@@ -44,7 +48,9 @@ public class ListPresenterImpl implements LoaderManager.LoaderCallbacks<Cursor> 
                         ManageProductContract.Category.PROJECTION,
                         null,
                         null,
-                        ManageProductContract.Category.DEFAULT_SORT);
+                        DatabaseContract.CategoryEntry.DEFAULT_SORT);
+                break;
+            case PRODUCT:
                 break;
         }
 
@@ -60,5 +66,10 @@ public class ListPresenterImpl implements LoaderManager.LoaderCallbacks<Cursor> 
     @Override
     public void onLoaderReset(Loader loader) {
         view.setCursor(null);
+    }
+
+    @Override
+    public void getAllItems(int resource) {
+
     }
 }

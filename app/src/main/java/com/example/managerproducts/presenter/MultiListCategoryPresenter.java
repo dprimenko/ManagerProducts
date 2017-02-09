@@ -1,10 +1,18 @@
 package com.example.managerproducts.presenter;
 
+import android.database.Cursor;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.CursorAdapter;
 
+import com.example.managerproducts.db.DatabaseContract;
 import com.example.managerproducts.db.DatabaseManager;
 import com.example.managerproducts.interfaces.IMultiListCategoryMvp;
 import com.example.managerproducts.model.Category;
+import com.example.managerproducts.provider.ManageProductContract;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +22,7 @@ import java.util.Map;
  * Created by usuario on 2/02/17.
  */
 
-public class MultiListCategoryPresenter implements IMultiListCategoryMvp.Presenter {
+public class MultiListCategoryPresenter implements IMultiListCategoryMvp.Presenter, LoaderManager.LoaderCallbacks<Cursor> {
 
     private IMultiListCategoryMvp.View view;
     private Map<Integer,Boolean> listSelectionItems;
@@ -74,8 +82,40 @@ public class MultiListCategoryPresenter implements IMultiListCategoryMvp.Present
     }
 
     @Override
-    public void getAllCategories() {
-        new GetAllCategories().execute();
+    public Loader onCreateLoader(int id, Bundle args) {
+        Loader loader = null;
+
+        switch (id) {
+            case CATEGORY:
+                loader = new CursorLoader(
+                        context,
+                        ManageProductContract.Category.CONTENT_URI,
+                        ManageProductContract.Category.PROJECTION,
+                        null,
+                        null,
+                        DatabaseContract.CategoryEntry.DEFAULT_SORT);
+                break;
+            case PRODUCT:
+                break;
+        }
+
+        return loader;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        view.setCursor(cursor);
+        view.getCursor().setNotificationUri(context.getContentResolver(), ManageProductContract.Category.CONTENT_URI);
+    }
+
+    @Override
+    public void onLoaderReset(Loader loader) {
+        view.setCursor(null);
+    }
+
+    @Override
+    public void getAllCategories(CursorAdapter cursorAdapter) {
+
     }
 
     @Override
