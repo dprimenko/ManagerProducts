@@ -182,7 +182,7 @@ public class DatabaseManager {
                 DatabaseContract.ProductEntry.TABLE_NAME,
                 contentValues,
                 DatabaseContract.ProductEntry._ID,
-                new String[]{product.getmId()});
+                new int[]{product.getmId()});
 
         return result;
     }
@@ -197,7 +197,7 @@ public class DatabaseManager {
         result = db.delete(
                 DatabaseContract.ProductEntry.TABLE_NAME,
                 DatabaseContract.ProductEntry._ID,
-                new String[]{product.getmId()});
+                new int[]{product.getmId()});
 
         return result;
     }

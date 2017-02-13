@@ -1,7 +1,9 @@
 package com.example.managerproducts.adapter;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,90 +12,70 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.managerproducts.R;
+import com.example.managerproducts.db.DatabaseContract;
+import com.example.managerproducts.interfaces.IListPresenter;
 import com.example.managerproducts.model.Product;
 import com.squareup.picasso.Picasso;
 
+import java.io.Serializable;
 import java.util.List;
+
+import static com.example.managerproducts.ManageProductApplication.getContext;
 
 /**
  * Created by dprimenko on 21/10/16.
  */
 
-public class ProductAdapter extends ArrayAdapter<Product> {
+public class ProductAdapter extends CursorAdapter implements Serializable {
 
-    private Context context;
-    private List<Product> tempList;
-
-    public ProductAdapter(Context context, int resource) {
-        super(context, resource);
+    public ProductAdapter(Context context, Cursor c, int flags) {
+        super(context, c, flags);
     }
 
-    public void addList(List<Product> products) {
-        clear();
-        addAll(products);
-    }
-
-    //region Lo más eficiente!!
-    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View newView(Context context, Cursor cursor, ViewGroup parent) {
+        LayoutInflater inflater = LayoutInflater.from(context);
 
-        View item = convertView;
-        ProductHolder productHolder;
+        View view = inflater.inflate(R.layout.item_list_product, parent, false);
+        ProductHolder holder = new ProductHolder();
 
-        if (item == null) {
-            // 1. Crear un objeto inflater que inicializamos al LayoutInflater del contexto
-            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            //2. Inflar la vista. Crear en memoria el objeto View que contiene los Widgets del XML
-            item = inflater.inflate(R.layout.item_list_product, null);
+        holder.imgProduct = (ImageView) view.findViewById(R.id.imgProduct);
+        holder.txvTitle = (TextView) view.findViewById(R.id.txvTitle);
+        holder.txvStock = (TextView) view.findViewById(R.id.txvStock);
+        holder.txvPrice = (TextView) view.findViewById(R.id.txvPrice);
 
-            productHolder = new ProductHolder();
+        view.setTag(holder);
 
-            // 3. Asignar a las variables los Widget mediante el método findByViewId
-
-            productHolder.imgProduct = (ImageView) item.findViewById(R.id.imgProduct);
-            productHolder.txvTitle = (TextView) item.findViewById(R.id.txvTitle);
-            productHolder.txvPrice = (TextView) item.findViewById(R.id.txvPrice);
-            productHolder.txvStock = (TextView) item.findViewById(R.id.txvStock);
-
-            item.setTag(productHolder);
-        }
-
-        else {
-            productHolder = (ProductHolder) item.getTag();
-        }
-
-        //region 4. Asignar datos del adapter a los widget
-
-        Picasso.with(getContext()).load(getItem(position).getmImage()).into(productHolder.imgProduct);
-        productHolder.txvTitle.setText(getItem(position).getmName());
-        productHolder.txvPrice.setText(getItem(position).getFormattedPrice());
-        productHolder.txvStock.setText(getItem(position).getFormattedStock());
-
-        return item;
-
-        //endregion
+        return view;
     }
 
-    public void addProduct(Product product) {
-        //DatabaseManager.getInstance().insert(product);
-        notifyDataSetChanged();
+    @Override
+    public void bindView(View view, Context context, Cursor cursor) {
+        ProductHolder holder = (ProductHolder) view.getTag();
+
+        Picasso.with(context).load(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE)));
+        holder.txvTitle.setText(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_NAME)));
+        holder.txvStock.setText(String.valueOf(cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_STOCK))));
+        holder.txvPrice.setText(String.valueOf(cursor.getDouble(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRICE))));
     }
 
-    public void updateProduct(Product product) {
-        //DatabaseManager.getInstance().update(product);
-        notifyDataSetChanged();
-    }
+    @Override
+    public Object getItem(int position) {
 
-    public void deleteProduct(Product product) {
-        //DatabaseManager.getInstance().delete(product);
-        notifyDataSetChanged();
-    }
-    // endregion
+        getCursor().moveToPosition(position);
 
-    /* Clase Interna que contiene los Widget
-    *  del fichero XML
-    */
+        Product product = new Product();
+        product.setmId(getCursor().getInt(getCursor().getColumnIndex(DatabaseContract.ProductEntry._ID)));
+        product.setmName(getCursor().getString(getCursor().getColumnIndex(DatabaseContract.ProductEntry.COLUMN_NAME)));
+        product.setmDescription(getCursor().getString(getCursor().getColumnIndex(DatabaseContract.ProductEntry.COLUMN_DESCRIPTION)));
+        product.setmBrand(getCursor().getString(getCursor().getColumnIndex(DatabaseContract.ProductEntry.COLUMN_BRAND)));
+        product.setmConcentration(getCursor().getString(getCursor().getColumnIndex(DatabaseContract.ProductEntry.COLUMN_DOSAGE)));
+        product.setmPrice(getCursor().getDouble(getCursor().getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRICE)));
+        product.setmStock(getCursor().getInt(getCursor().getColumnIndex(DatabaseContract.ProductEntry.COLUMN_STOCK)));
+        product.setmImage(getCursor().getString(getCursor().getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE)));
+
+        return product;
+    }
 
     class ProductHolder {
         ImageView imgProduct;

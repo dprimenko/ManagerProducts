@@ -1,6 +1,5 @@
 package com.example.managerproducts.fragments;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -23,10 +21,8 @@ import android.widget.ListView;
 import com.example.managerproducts.R;
 import com.example.managerproducts.SimpleMultiChoiceModeListener;
 import com.example.managerproducts.adapter.CategoryAdapter;
-import com.example.managerproducts.adapter.ProductAdapter;
 import com.example.managerproducts.interfaces.IMultiListCategoryMvp;
 import com.example.managerproducts.model.Category;
-import com.example.managerproducts.model.Product;
 import com.example.managerproducts.presenter.MultiListCategoryPresenter;
 import com.example.managerproducts.presenter.MultiListProductPresenter;
 
@@ -195,7 +191,7 @@ public class MultiListCategoriesFragment extends Fragment implements IMultiListC
     public void onActionItemClicked(int action) {
         switch (action) {
             case MultiListProductPresenter.DELETE_MULTIPLE_ITEMS:
-                presenter.deleteMultipleCategories();
+                presenter.deleteMultipleItems();
                 break;
         }
     }

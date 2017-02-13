@@ -17,7 +17,7 @@ import java.util.Locale;
 public class Product implements Comparable<Product>, Parcelable{
 
     //region Fields
-    private String mId;
+    private int mId;
     private String mName;
     private String mDescription;
     private String mBrand;
@@ -41,7 +41,7 @@ public class Product implements Comparable<Product>, Parcelable{
     //endregion
 
     protected Product(Parcel in) {
-        mId = in.readString();
+        mId = in.readInt();
         mName = in.readString();
         mDescription = in.readString();
         mBrand = in.readString();
@@ -64,11 +64,11 @@ public class Product implements Comparable<Product>, Parcelable{
     };
 
     //region Getter&Setter
-    public String getmId() {
+    public int getmId() {
         return mId;
     }
 
-    public void setmId(String mId) {
+    public void setmId(int mId) {
         this.mId = mId;
     }
 
@@ -204,7 +204,7 @@ public class Product implements Comparable<Product>, Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mId);
+        dest.writeInt(mId);
         dest.writeString(mName);
         dest.writeString(mDescription);
         dest.writeString(mBrand);

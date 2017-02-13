@@ -1,9 +1,11 @@
 package com.example.managerproducts.provider;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
@@ -97,16 +99,78 @@ public class ManageProductProvider extends ContentProvider {
     @Nullable
     @Override
     public Uri insert(Uri uri, ContentValues values) {
-        return null;
+
+        Uri newUri = null;
+
+        long regId = -1;
+
+        switch (uriMatcher.match(uri)) {
+            case CATEGORY:
+                regId = sqLiteDatabase.insert(DatabaseContract.CategoryEntry.TABLE_NAME, null, values);
+                break;
+            case PRODUCT:
+                regId = sqLiteDatabase.insert(DatabaseContract.ProductEntry.TABLE_NAME, null, values);
+                break;
+        }
+
+        newUri = ContentUris.withAppendedId(uri, regId);
+
+        if (regId != -1) {
+            getContext().getContentResolver().notifyChange(newUri, null); // No tenemos ninguna clase observer
+        } else {
+            throw new SQLException("CR: Insert error");
+        }
+        return newUri;
     }
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        return 0;
+
+        Uri newUri = null;
+        int regId = -1;
+
+        switch (uriMatcher.match(uri)) {
+            case CATEGORY:
+                regId = sqLiteDatabase.delete(DatabaseContract.CategoryEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+            case PRODUCT:
+                regId = sqLiteDatabase.delete(DatabaseContract.ProductEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+        }
+
+        newUri = ContentUris.withAppendedId(uri, regId);
+
+        if (regId != -1) {
+            getContext().getContentResolver().notifyChange(newUri, null); // No tenemos ninguna clase observer
+        } else {
+            throw new SQLException("CR: Delete error");
+        }
+
+        return regId;
     }
 
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        return 0;
+        Uri newUri = null;
+        int regId = -1;
+
+        switch (uriMatcher.match(uri)) {
+            case CATEGORY:
+                regId = sqLiteDatabase.update(DatabaseContract.CategoryEntry.TABLE_NAME, values, selection, selectionArgs);
+                break;
+            case PRODUCT:
+                regId = sqLiteDatabase.update(DatabaseContract.ProductEntry.TABLE_NAME, values, selection, selectionArgs);
+                break;
+        }
+
+        newUri = ContentUris.withAppendedId(uri, regId);
+
+        if (regId != -1) {
+            getContext().getContentResolver().notifyChange(newUri, null); // No tenemos ninguna clase observer
+        } else {
+            throw new SQLException("CR: No columns detected");
+        }
+
+        return regId;
     }
 }

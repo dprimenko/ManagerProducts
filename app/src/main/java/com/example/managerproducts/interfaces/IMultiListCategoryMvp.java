@@ -19,23 +19,11 @@ import java.util.ArrayList;
 public interface IMultiListCategoryMvp {
 
     interface View {
-        void showUndoSnackbar(ArrayList<Category> categories);
-        CategoryAdapter getAdapter();
-        Context getContext();
-        Cursor getCursor();
-        void setCursor(Cursor cursor);
+        int ADD_CATEGORY_REQUEST = 10;
+        int EDIT_CATEGORY_REQUEST = 11;
     }
-
     interface Presenter {
-        void setNewSelection(int position, boolean checked);
-        void removeSelection(int position);
-        void clearSelection();
-        void deleteMultipleCategories();
-
         void restoreCategories(ArrayList<Category> categories);
-
-        void addCategory(String category);
-        void getAllCategories(CursorAdapter cursorAdapter);
-        void updateCategory(Category category);
+        void addCategory(Category category);
     }
 }
