@@ -1,6 +1,7 @@
 package com.example.managerproducts.fragments;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,7 +21,9 @@ import android.widget.ListView;
 
 import com.example.managerproducts.R;
 import com.example.managerproducts.SimpleMultiChoiceModeListener;
+import com.example.managerproducts.adapter.CategoryAdapter;
 import com.example.managerproducts.adapter.ProductAdapter;
+import com.example.managerproducts.interfaces.IListPresenter;
 import com.example.managerproducts.interfaces.IMultiListProductMvp;
 import com.example.managerproducts.model.Product;
 import com.example.managerproducts.presenter.MultiListProductPresenter;
@@ -41,11 +45,6 @@ public class MultiListProductsFragment extends Fragment implements SimpleMultiCh
 
     private MultiListProductFragmentListener mCallback;
 
-    @Override
-    public ProductAdapter getAdapter() {
-        return adapter;
-    }
-
 
     public interface MultiListProductFragmentListener {
         void onManageProductFragmentListener(Bundle bundle);
@@ -65,9 +64,10 @@ public class MultiListProductsFragment extends Fragment implements SimpleMultiCh
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        adapter = new ProductAdapter(getActivity(), R.layout.item_list_product);
+        setRetainInstance(true);
+        adapter = new ProductAdapter(getActivity(), null, IListPresenter.PRODUCT);
         getRequestManageProduct();
-        presenter.getAllProducts();
+        presenter.getAllValues(adapter);
     }
 
     @Override
@@ -156,9 +156,14 @@ public class MultiListProductsFragment extends Fragment implements SimpleMultiCh
     }
 
 
+
     // Métodos de la interfaz IManageProductMvp.View
+
     @Override
-    public void showUndoSnackbar(final ArrayList<Product> products) {
+    public void showUndoSnackbar(ArrayList<?> items) {
+
+        final ArrayList<Product> products = (ArrayList<Product>) items;
+
         Snackbar.make(getView(), getString(R.string.items_deleted), Snackbar.LENGTH_LONG)
                 .setAction("UNDO", new View.OnClickListener() {
                     @Override
@@ -167,6 +172,19 @@ public class MultiListProductsFragment extends Fragment implements SimpleMultiCh
                         scrollDown();
                     }
                 }).show();
+    }
+
+    @Override
+    public CursorAdapter getCursorAdapter() {
+        return adapter;
+    }
+
+
+    @Override
+    public void setCursor(Cursor cursor) {
+        if (cursor != null) {
+            adapter.swapCursor(cursor);
+        }
     }
 
     // Métodos del Callback del menu contextual
@@ -198,8 +216,8 @@ public class MultiListProductsFragment extends Fragment implements SimpleMultiCh
     @Override
     public void onActionItemClicked(int action) {
         switch (action) {
-            case MultiListProductPresenter.DELETE_MULTIPLE_ITEMS:
-                presenter.deleteMultipleProducts();
+            case IListPresenter.DELETE_MULTIPLE_ITEMS:
+                presenter.deleteMultipleItems();
                 break;
         }
     }
@@ -221,10 +239,10 @@ public class MultiListProductsFragment extends Fragment implements SimpleMultiCh
         if (getArguments() != null) {
             Product product = ((Product)getArguments().getParcelable("product_key"));
 
-            if (getArguments().getInt("manage_request") == MultiListProductPresenter.ADD_PRODUCT_REQUEST) {
+            if (getArguments().getInt("manage_request") == IMultiListProductMvp.View.ADD_PRODUCT_REQUEST) {
                 presenter.addProduct(product);
             }
-            else if (getArguments().getInt("manage_request") == MultiListProductPresenter.EDIT_PRODUCT_REQUEST) {
+            else if (getArguments().getInt("manage_request") == IMultiListProductMvp.View.EDIT_PRODUCT_REQUEST) {
             }
         }
     }

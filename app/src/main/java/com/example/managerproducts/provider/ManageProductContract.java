@@ -3,6 +3,10 @@ package com.example.managerproducts.provider;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
+import com.example.managerproducts.db.DatabaseContract;
+
+import java.util.HashMap;
+
 /**
  * Created by usuario on 20/01/17.
  */
@@ -36,8 +40,23 @@ public final class ManageProductContract {
         public static final String PRICE = "price";
         public static final String STOCK = "stock";
         public static final String IMAGE = "image";
-        public static final String CATEGORY_ID = "category_id";
+        public static final String CATEGORY_ID = "idCategory";
         public static final String[] PROJECTION = new String[] {BaseColumns._ID, NAME, DESCRIPTION, BRAND, DOSAGE, PRICE, STOCK, IMAGE, CATEGORY_ID};
+
+        public static final HashMap<String, String> sProductProjectionMap;
+
+        static {
+            sProductProjectionMap = new HashMap();
+            sProductProjectionMap.put(DatabaseContract.ProductEntry._ID, DatabaseContract.ProductEntry._ID);
+            sProductProjectionMap.put(DatabaseContract.ProductEntry.COLUMN_NAME, DatabaseContract.ProductEntry.COLUMN_NAME);
+            sProductProjectionMap.put(DatabaseContract.ProductEntry.COLUMN_DESCRIPTION, DatabaseContract.ProductEntry.COLUMN_DESCRIPTION);
+            sProductProjectionMap.put(DatabaseContract.ProductEntry.COLUMN_BRAND, DatabaseContract.ProductEntry.COLUMN_BRAND);
+            sProductProjectionMap.put(DatabaseContract.ProductEntry.COLUMN_DOSAGE, DatabaseContract.ProductEntry.COLUMN_DOSAGE);
+            sProductProjectionMap.put(DatabaseContract.ProductEntry.COLUMN_PRICE, DatabaseContract.ProductEntry.COLUMN_PRICE);
+            sProductProjectionMap.put(DatabaseContract.ProductEntry.COLUMN_STOCK, DatabaseContract.ProductEntry.COLUMN_STOCK);
+            sProductProjectionMap.put(DatabaseContract.ProductEntry.COLUMN_IMAGE, DatabaseContract.ProductEntry.COLUMN_IMAGE);
+            sProductProjectionMap.put(CATEGORY_ID, DatabaseContract.ProductEntry.COLUMN_IDCATEGORY);
+        }
     }
 
     public static class Pharmacy implements BaseColumns {

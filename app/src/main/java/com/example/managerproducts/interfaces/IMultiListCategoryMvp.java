@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public interface IMultiListCategoryMvp {
 
-    interface View {
+    interface View extends IListPresenter.View {
         int ADD_CATEGORY_REQUEST = 10;
         int EDIT_CATEGORY_REQUEST = 11;
     }

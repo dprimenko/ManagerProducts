@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 
 import com.example.managerproducts.R;
 import com.example.managerproducts.interfaces.IManageProductMvp;
+import com.example.managerproducts.interfaces.IMultiListProductMvp;
 import com.example.managerproducts.model.Product;
 import com.example.managerproducts.presenter.ManageProductPresenter;
 import com.example.managerproducts.presenter.MultiListProductPresenter;
@@ -107,7 +108,7 @@ public class ManageProductFragment extends Fragment implements IManageProductMvp
                     edtBrand.getText().toString(),
                     edtPrice.getText().toString(),
                     edtConcentration.getText().toString(),
-                    MultiListProductPresenter.ADD_PRODUCT_REQUEST);
+                    IMultiListProductMvp.View.ADD_PRODUCT_REQUEST);
         }
 
         return super.onOptionsItemSelected(item);

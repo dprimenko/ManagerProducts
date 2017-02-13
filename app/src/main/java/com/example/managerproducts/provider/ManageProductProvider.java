@@ -40,17 +40,16 @@ public class ManageProductProvider extends ContentProvider {
 
     static {
         uriMatcher.addURI(ManageProductContract.AUTHORITY, ManageProductContract.Product.CONTENT_PATH, PRODUCT);
-        uriMatcher.addURI(ManageProductContract.AUTHORITY, ManageProductContract.Category.CONTENT_PATH, CATEGORY);
-        uriMatcher.addURI(ManageProductContract.AUTHORITY, ManageProductContract.InvoiceStatus.CONTENT_PATH, INVOICE_STATUS);
-        uriMatcher.addURI(ManageProductContract.AUTHORITY, ManageProductContract.InvoiceLine.CONTENT_PATH, INVOICE_LINE);
-        uriMatcher.addURI(ManageProductContract.AUTHORITY, ManageProductContract.Invoice.CONTENT_PATH, INVOICE);
-        uriMatcher.addURI(ManageProductContract.AUTHORITY, ManageProductContract.Pharmacy.CONTENT_PATH, PHARMACY);
-
         uriMatcher.addURI(ManageProductContract.AUTHORITY, ManageProductContract.Product.CONTENT_PATH + "/#", PRODUCT_ID);
+        uriMatcher.addURI(ManageProductContract.AUTHORITY, ManageProductContract.Category.CONTENT_PATH, CATEGORY);
         uriMatcher.addURI(ManageProductContract.AUTHORITY, ManageProductContract.Category.CONTENT_PATH + "/#", CATEGORY_ID);
+        uriMatcher.addURI(ManageProductContract.AUTHORITY, ManageProductContract.InvoiceStatus.CONTENT_PATH, INVOICE_STATUS);
         uriMatcher.addURI(ManageProductContract.AUTHORITY, ManageProductContract.InvoiceStatus.CONTENT_PATH + "/#", INVOICE_STATUS_ID);
+        uriMatcher.addURI(ManageProductContract.AUTHORITY, ManageProductContract.InvoiceLine.CONTENT_PATH, INVOICE_LINE);
         uriMatcher.addURI(ManageProductContract.AUTHORITY, ManageProductContract.InvoiceLine.CONTENT_PATH + "/#", INVOICE_LINE_ID);
+        uriMatcher.addURI(ManageProductContract.AUTHORITY, ManageProductContract.Invoice.CONTENT_PATH, INVOICE);
         uriMatcher.addURI(ManageProductContract.AUTHORITY, ManageProductContract.Invoice.CONTENT_PATH + "/#", INVOICE_ID);
+        uriMatcher.addURI(ManageProductContract.AUTHORITY, ManageProductContract.Pharmacy.CONTENT_PATH, PHARMACY);
         uriMatcher.addURI(ManageProductContract.AUTHORITY, ManageProductContract.Pharmacy.CONTENT_PATH + "/#", PHARMACY_ID);
 
     }
@@ -66,6 +65,8 @@ public class ManageProductProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 
         SQLiteQueryBuilder sqLiteQueryBuilder = new SQLiteQueryBuilder();
+
+        Log.d("Uri", uri.toString());
 
         switch(uriMatcher.match(uri)) {
             case CATEGORY:

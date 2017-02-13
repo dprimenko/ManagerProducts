@@ -48,7 +48,7 @@ public class DatabaseManager {
         if (cursor.moveToFirst()) {
             do {
                 Product product = new Product();
-                product.setmId(String.valueOf(cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry._ID))));
+                product.setmId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry._ID)));
                 product.setmName(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_NAME)));
                 product.setmDescription(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_DESCRIPTION)));
                 product.setmBrand(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_BRAND)));
@@ -73,7 +73,7 @@ public class DatabaseManager {
         if (cursor.moveToFirst()) {
             do {
                 Category category = new Category();
-                category.setmId(String.valueOf(cursor.getInt(cursor.getColumnIndex(DatabaseContract.CategoryEntry._ID))));
+                category.setmId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.CategoryEntry._ID)));
                 category.setmName(cursor.getString(cursor.getColumnIndex(DatabaseContract.CategoryEntry.COLUMN_NAME)));
 
                 categoriesList.add(category);
@@ -182,7 +182,7 @@ public class DatabaseManager {
                 DatabaseContract.ProductEntry.TABLE_NAME,
                 contentValues,
                 DatabaseContract.ProductEntry._ID,
-                new int[]{product.getmId()});
+                new String[]{String.valueOf(product.getmId())});
 
         return result;
     }
@@ -197,7 +197,7 @@ public class DatabaseManager {
         result = db.delete(
                 DatabaseContract.ProductEntry.TABLE_NAME,
                 DatabaseContract.ProductEntry._ID,
-                new int[]{product.getmId()});
+                new String[]{String.valueOf(product.getmId())});
 
         return result;
     }

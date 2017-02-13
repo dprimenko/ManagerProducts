@@ -25,6 +25,8 @@ public class Product implements Comparable<Product>, Parcelable{
     private double mPrice;
     private int mStock;
     private String mImage;
+    private int mIdCategory;
+
     public static final Comparator<Product> PRICE_COMPARATOR = new Comparator<Product>() {
         @Override
         public int compare(Product p1, Product p2) {
@@ -49,6 +51,7 @@ public class Product implements Comparable<Product>, Parcelable{
         mPrice = in.readDouble();
         mStock = in.readInt();
         mImage = in.readString();
+        mIdCategory = in.readInt();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -126,6 +129,14 @@ public class Product implements Comparable<Product>, Parcelable{
 
     public void setmImage(String mImage) {
         this.mImage = mImage;
+    }
+
+    public int getmIdCategory() {
+        return mIdCategory;
+    }
+
+    public void setmIdCategory(int mIdCategory) {
+        this.mIdCategory = mIdCategory;
     }
 
     public String getFormattedPrice() {
@@ -212,6 +223,7 @@ public class Product implements Comparable<Product>, Parcelable{
         dest.writeDouble(mPrice);
         dest.writeInt(mStock);
         dest.writeString(mImage);
+        dest.writeInt(mIdCategory);
     }
     //endregion
 

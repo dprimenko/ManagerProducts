@@ -62,12 +62,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         try {
             db.beginTransaction();
-            db.execSQL(ManageProductContract.CategoryEntry.SQL_CREATE_ENTRIES);
-            db.execSQL(ManageProductContract.ProductEntry.SQL_CREATE_ENTRIES);
-            db.execSQL(ManageProductContract.PharmacyEntry.SQL_CREATE_ENTRIES);
-            db.execSQL(ManageProductContract.Invoice.SQL_CREATE_ENTRIES);
-            db.execSQL(ManageProductContract.InvoiceLineEntry.SQL_CREATE_ENTRIES);
-            db.execSQL(ManageProductContract.InvoiceStatus.SQL_CREATE_ENTRIES);
+            db.execSQL(DatabaseContract.CategoryEntry.SQL_CREATE_ENTRIES);
+            db.execSQL(DatabaseContract.ProductEntry.SQL_CREATE_ENTRIES);
+            db.execSQL(DatabaseContract.PharmacyEntry.SQL_CREATE_ENTRIES);
+            db.execSQL(DatabaseContract.InvoiceEntry.SQL_CREATE_ENTRIES);
+            db.execSQL(DatabaseContract.InvoiceLineEntry.SQL_CREATE_ENTRIES);
+            db.execSQL(DatabaseContract.InvoiceStatusEntry.SQL_CREATE_ENTRIES);
             db.setTransactionSuccessful();
         } catch (SQLiteException e) {
             e.printStackTrace();
@@ -81,12 +81,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         try {
             db.beginTransaction();
-            db.execSQL(ManageProductContract.CategoryEntry.SQL_DROP_TABLE);
-            db.execSQL(ManageProductContract.ProductEntry.SQL_DROP_TABLE);
-            db.execSQL(ManageProductContract.PharmacyEntry.SQL_DROP_TABLE);
-            db.execSQL(ManageProductContract.Invoice.SQL_DROP_TABLE);
-            db.execSQL(ManageProductContract.InvoiceLineEntry.SQL_DROP_TABLE);
-            db.execSQL(ManageProductContract.InvoiceStatus.SQL_DROP_TABLE);
+            db.execSQL(DatabaseContract.CategoryEntry.SQL_DROP_TABLE);
+            db.execSQL(DatabaseContract.ProductEntry.SQL_DROP_TABLE);
+            db.execSQL(DatabaseContract.PharmacyEntry.SQL_DROP_TABLE);
+            db.execSQL(DatabaseContract.InvoiceEntry.SQL_DROP_TABLE);
+            db.execSQL(DatabaseContract.InvoiceLineEntry.SQL_DROP_TABLE);
+            db.execSQL(DatabaseContract.InvoiceStatusEntry.SQL_DROP_TABLE);
             db.setTransactionSuccessful();
             db.endTransaction();
             onCreate(db);

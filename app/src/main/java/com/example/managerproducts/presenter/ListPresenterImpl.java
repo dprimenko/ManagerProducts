@@ -10,12 +10,16 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.managerproducts.adapter.CategoryAdapter;
 import com.example.managerproducts.db.DatabaseContract;
-import com.example.managerproducts.interfaces.ICategoryPresenter;
+import com.example.managerproducts.db.DatabaseManager;
+import com.example.managerproducts.fragments.ManageProductFragment;
+import com.example.managerproducts.fragments.MultiListCategoriesFragment;
+import com.example.managerproducts.fragments.MultiListProductsFragment;
 import com.example.managerproducts.interfaces.IListPresenter;
-import com.example.managerproducts.interfaces.IListProductMvp;
 import com.example.managerproducts.model.Category;
 import com.example.managerproducts.model.Product;
 import com.example.managerproducts.provider.ManageProductContract;
@@ -59,7 +63,7 @@ public class ListPresenterImpl implements LoaderManager.LoaderCallbacks<Cursor>,
         switch (id) {
             case CATEGORY:
                 loader = new CursorLoader(
-                        context,
+                        ((MultiListCategoriesFragment)view).getActivity(),
                         ManageProductContract.Category.CONTENT_URI,
                         ManageProductContract.Category.PROJECTION,
                         null,
@@ -68,7 +72,7 @@ public class ListPresenterImpl implements LoaderManager.LoaderCallbacks<Cursor>,
                 break;
             case PRODUCT:
                 loader = new CursorLoader(
-                        context,
+                        ((MultiListProductsFragment)view).getActivity(),
                         ManageProductContract.Product.CONTENT_URI,
                         ManageProductContract.Product.PROJECTION,
                         null,
@@ -76,7 +80,6 @@ public class ListPresenterImpl implements LoaderManager.LoaderCallbacks<Cursor>,
                         null);
                 break;
         }
-
         return loader;
     }
 
@@ -85,15 +88,14 @@ public class ListPresenterImpl implements LoaderManager.LoaderCallbacks<Cursor>,
 
         switch (loader.getId()) {
             case CATEGORY:
-                view.getCursor().setNotificationUri(context.getContentResolver(), ManageProductContract.Category.CONTENT_URI);
+                cursor.setNotificationUri(((MultiListCategoriesFragment) view).getActivity().getContentResolver(), ManageProductContract.Category.CONTENT_URI);
                 break;
             case PRODUCT:
-                view.getCursor().setNotificationUri(context.getContentResolver(), ManageProductContract.Product.CONTENT_URI);
+                cursor.setNotificationUri(((MultiListProductsFragment) view).getActivity().getContentResolver(), ManageProductContract.Product.CONTENT_URI);
                 break;
         }
 
         view.setCursor(cursor);
-
     }
 
     @Override
@@ -140,18 +142,18 @@ public class ListPresenterImpl implements LoaderManager.LoaderCallbacks<Cursor>,
                 case CATEGORY:
                     ArrayList<Category> categories = new ArrayList<>();
                     for (Map.Entry<Integer,Boolean> item:listSelectionItems.entrySet()) {
-                        Category category = (Category) view.getCategoryAdapter().getItem(item.getKey());
+                        Category category = (Category) ((CategoryAdapter)view.getCursorAdapter()).getItem(item.getKey());
                         categories.add(category);
-                        view.getCategoryAdapter().deleteCategory(category);
+                        //((CategoryAdapter)view.getCursorAdapter()).deleteCategory(category);
                     }
                     view.showUndoSnackbar(categories);
                     break;
                 case PRODUCT:
                     ArrayList<Product> products = new ArrayList<>();
                     for (Map.Entry<Integer,Boolean> item:listSelectionItems.entrySet()) {
-                        Product product = (Product) view.getProductAdapter().getItem(item.getKey());
-                        products.add(product);
-                        view.getProductAdapter().deleteProduct(product);
+                        //Product product = (Product) view.getProductAdapter().getItem(item.getKey());
+                        //products.add(product);
+                        //view.getProductAdapter().deleteProduct(product);
                     }
                     view.showUndoSnackbar(products);
                     break;
@@ -162,12 +164,12 @@ public class ListPresenterImpl implements LoaderManager.LoaderCallbacks<Cursor>,
 
     @Override
     public void getAllValues(CursorAdapter cursorAdapter) {
-        ((AppCompatActivity)context).getSupportLoaderManager().initLoader(id, null, this);
+        ((MultiListProductsFragment)view).getLoaderManager().initLoader(id, null, this);
     }
 
     @Override
     public void restartLoader(CursorAdapter adapter) {
-        ((AppCompatActivity)context).getSupportLoaderManager().restartLoader(id, null, this);
+        ((MultiListProductsFragment)view).getLoaderManager().restartLoader(id, null, this);
     }
 
 

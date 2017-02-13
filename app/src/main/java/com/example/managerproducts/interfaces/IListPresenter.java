@@ -23,10 +23,8 @@ public interface IListPresenter {
 
     interface View{
         void showUndoSnackbar(ArrayList<?> items);
-        CategoryAdapter getCategoryAdapter();
-        ProductAdapter getProductAdapter();
         Context getContext();
-        Cursor getCursor();
+        CursorAdapter getCursorAdapter();
         void setCursor(Cursor cursor);
     }
 

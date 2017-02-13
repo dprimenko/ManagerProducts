@@ -13,19 +13,16 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.example.managerproducts.fragments.ListProductsFragment;
 import com.example.managerproducts.fragments.ManageProductFragment;
 import com.example.managerproducts.fragments.MultiListCategoriesFragment;
 import com.example.managerproducts.fragments.MultiListProductsFragment;
-import com.example.managerproducts.presenter.MultiListCategoryPresenter;
 
 /**
  * Created by dprimenko on 15/12/16.
  */
 
-public class MainActivity extends AppCompatActivity implements MultiListProductsFragment.MultiListProductFragmentListener, ListProductsFragment.ListProductFragmentListener, ManageProductFragment.ManageProductFragmentListener{
+public class MainActivity extends AppCompatActivity implements MultiListProductsFragment.MultiListProductFragmentListener, ManageProductFragment.ManageProductFragmentListener{
 
-    private ListProductsFragment listProductsFragment;
     private ManageProductFragment manageProductFragment;
     private MultiListProductsFragment multiListProductsFragment;
     private MultiListCategoriesFragment multiListCategoriesFragment;
@@ -41,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements MultiListProducts
         multiListProductsFragment = MultiListProductsFragment.newInstance(null);
         mNav = (NavigationView)findViewById(R.id.navigation_view);
         mDrawer = (DrawerLayout)findViewById(R.id.drawer_layout);
-        Log.d("Null", mDrawer.toString());
         toolbar_main = (Toolbar) findViewById(R.id.toolbar_main);
 
         setSupportActionBar(toolbar_main);

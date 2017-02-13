@@ -9,11 +9,11 @@ import android.os.Parcelable;
 
 public class Category implements Parcelable {
 
-    private String mId;
+    private int mId;
     private String mName;
 
     protected Category(Parcel in) {
-        mId = in.readString();
+        mId = in.readInt();
         mName = in.readString();
     }
 
@@ -29,11 +29,11 @@ public class Category implements Parcelable {
         }
     };
 
-    public String getmId() {
+    public int getmId() {
         return mId;
     }
 
-    public void setmId(String mId) {
+    public void setmId(int mId) {
         this.mId = mId;
     }
 
@@ -48,7 +48,7 @@ public class Category implements Parcelable {
     public Category() {
     }
 
-    public Category(String mId, String mName) {
+    public Category(int mId, String mName) {
         this.mId = mId;
         this.mName = mName;
     }
@@ -65,7 +65,7 @@ public class Category implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(mId);
+        dest.writeInt(mId);
         dest.writeString(mName);
     }
 }

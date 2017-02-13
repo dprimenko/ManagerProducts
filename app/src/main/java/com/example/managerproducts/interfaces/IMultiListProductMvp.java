@@ -9,21 +9,15 @@ import java.util.ArrayList;
  * Created by dprimenko on 16/12/16.
  */
 public interface IMultiListProductMvp {
-    interface View {
-        void showUndoSnackbar(ArrayList<Product> products);
-        ProductAdapter getAdapter();
+
+    interface View extends IListPresenter.View  {
+        int ADD_PRODUCT_REQUEST = 10;
+        int EDIT_PRODUCT_REQUEST = 11;
     }
 
     interface Presenter {
-        void setNewSelection(int position, boolean checked);
-        void removeSelection(int position);
-        void clearSelection();
-        void deleteMultipleProducts();
-
         void restoreProducts(ArrayList<Product> products);
-
         void addProduct(Product product);
-        void getAllProducts();
         void updateProduct(Product product);
     }
 }

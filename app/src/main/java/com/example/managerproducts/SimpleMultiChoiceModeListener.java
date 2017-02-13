@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.AbsListView;
 
+import com.example.managerproducts.interfaces.IListPresenter;
 import com.example.managerproducts.presenter.ListProductPresenter;
 import com.example.managerproducts.presenter.ManageProductPresenter;
 import com.example.managerproducts.presenter.MultiListCategoryPresenter;
@@ -75,7 +76,7 @@ public class SimpleMultiChoiceModeListener implements AbsListView.MultiChoiceMod
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_del_multiple:
-                mCallback.onActionItemClicked(MultiListCategoryPresenter.DELETE_MULTIPLE_ITEMS);
+                mCallback.onActionItemClicked(IListPresenter.DELETE_MULTIPLE_ITEMS);
                 break;
         }
         mode.finish();
